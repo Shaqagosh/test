@@ -1860,9 +1860,11 @@ local aa = {
                 end
             )
             m.AddSignal(
-                v.TabHolder.UIListLayout:GetPropertyChangedSignal "AbsoluteContentSize",
+                v.TabHolder:GetPropertyChangedSignal "CanvasPosition",
                 function()
-                    v.TabHolder.CanvasSize = UDim2.new(0, 0, 0, v.TabHolder.UIListLayout.AbsoluteContentSize.Y)
+                    I = N:GetCurrentTabPos() + 16
+                    J = 0
+                    v.SelectorPosMotor:setGoal(r(N:GetCurrentTabPos()))
                 end
             )
             m.AddSignal(
@@ -1939,14 +1941,6 @@ local aa = {
             function v.SelectTab(O, P)
                 N:SelectTab(1)
             end
-            m.AddSignal(
-                v.TabHolder:GetPropertyChangedSignal "CanvasPosition",
-                function()
-                    I = N:GetCurrentTabPos() + 16
-                    J = 0
-                    v.SelectorPosMotor:setGoal(r(N:GetCurrentTabPos()))
-                end
-            )
             return v
         end
     end,
@@ -2244,7 +2238,7 @@ local aa = {
                         s(
                             "ImageLabel",
                             {
-                                Size = UDim2.new(0, 18, 0, 18),
+                                Size = UDim2.fromOffset(18, 18),
                                 ScaleType = Enum.ScaleType.Fit,
                                 AnchorPoint = Vector2.new(0.5, 0.5),
                                 BackgroundTransparency = 1,
@@ -2681,7 +2675,7 @@ local aa = {
                     "ImageLabel",
                     {
                         Image = "rbxassetid://10709790948",
-                        Size = UDim2.fromOffset(16, 16),
+                        Size = UDim.fromOffset(16, 16),
                         AnchorPoint = Vector2.new(1, 0.5),
                         Position = UDim2.new(1, -8, 0.5, 0),
                         BackgroundTransparency = 1,
@@ -2847,16 +2841,16 @@ local aa = {
                 local C, D = l.Values, {}
                 local existing = {}
                 for _, child in ipairs(t:GetChildren()) do
-                    if child:IsA("TextButton") then
-                        existing[child.ButtonLabel.Text] = child
-                    end
-                end
-                for name, frame in pairs(existing) do
-                    if not table.find(C, name) then
-                        frame:Destroy()
-                        existing[name] = nil
-                    end
-                end
+	            	if child:IsA("TextButton") then
+	            		existing[child.ButtonLabel.Text] = child
+	            	end
+	            end
+	            for name, frame in pairs(existing) do
+	            	if not table.find(C, name) then
+	            		frame:Destroy()
+	            		existing[name] = nil
+	            	end
+	            end
                 local G = 0
                 for H, I in next, C do
                     if not existing[I] then
@@ -3068,7 +3062,6 @@ local aa = {
             k.Options[i] = l
             return l
         end
-        return g
     end,
     [23] = function()
         local aa, ab, ac, ad, ae = b(23)
@@ -3185,7 +3178,7 @@ local aa = {
                     TextColor3 = Color3.fromRGB(240, 240, 240),
                     TextSize = 13,
                     TextXAlignment = Enum.TextXAlignment.Center,
-                    Size = UDim2.new(0, 0, 0, 14),
+                    Size = UDim.new(0, 0, 0, 14),
                     Position = UDim2.new(0, 0, 0.5, 0),
                     AnchorPoint = Vector2.new(0, 0.5),
                     BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -3376,26 +3369,55 @@ local aa = {
             assert(f.Max, "Slider - Missing maximum value.")
             assert(f.Rounding, "Slider - Missing rounding value.")
             local h, i, j =
-                {
-                    Value = nil,
-                    Min = f.Min,
-                    Max = f.Max,
-                    Rounding = f.Rounding,
-                    Increment = f.Increment or 1,
-                    Callback = f.Callback or function(h) end,
-                    Type = "Slider"
-                },
+                {Value = nil, Min = f.Min, Max = f.Max, Rounding = f.Rounding, Callback = f.Callback or function(h)
+                        end, Type = "Slider"},
                 false,
                 ac(aj.Element)(f.Title, f.Description, d.Container, false)
             j.DescLabel.Size = UDim2.new(1, -170, 0, 14)
             h.SetTitle = j.SetTitle
             h.SetDesc = j.SetDesc
-            local k =
-                ai(
+
+            -- Botão de diminuir
+            local btnMinus = ai(
+                "TextButton",
+                {
+                    Size = UDim2.fromOffset(24, 24),
+                    Position = UDim2.new(0, 0, 0.5, 0),
+                    AnchorPoint = Vector2.new(0, 0.5),
+                    BackgroundTransparency = 0.2,
+                    Text = "-",
+                    Font = Enum.Font.SourceSansBold,
+                    TextSize = 18,
+                    TextColor3 = Color3.fromRGB(240, 240, 240),
+                    ThemeTag = {BackgroundColor3 = "Element", TextColor3 = "Text"},
+                    Parent = j.Frame
+                },
+                {ai("UICorner", {CornerRadius = UDim.new(1, 0)})}
+            )
+            -- Botão de aumentar
+            local btnPlus = ai(
+                "TextButton",
+                {
+                    Size = UDim2.fromOffset(24, 24),
+                    Position = UDim2.new(1, -24, 0.5, 0),
+                    AnchorPoint = Vector2.new(0, 0.5),
+                    BackgroundTransparency = 0.2,
+                    Text = "+",
+                    Font = Enum.Font.SourceSansBold,
+                    TextSize = 18,
+                    TextColor3 = Color3.fromRGB(240, 240, 240),
+                    ThemeTag = {BackgroundColor3 = "Element", TextColor3 = "Text"},
+                    Parent = j.Frame
+                },
+                {ai("UICorner", {CornerRadius = UDim.new(1, 0)})}
+            )
+
+            -- Slider visual (ajustado para não sobrepor os botões)
+            local k = ai(
                 "ImageLabel",
                 {
                     AnchorPoint = Vector2.new(0, 0.5),
-                    Position = UDim2.new(0, -7, 0.5, 0),
+                    Position = UDim2.new(0, 28, 0.5, 0),
                     Size = UDim2.fromOffset(14, 14),
                     Image = "http://www.roblox.com/asset/?id=12266946128",
                     ThemeTag = {ImageColor3 = "Accent"}
@@ -3404,7 +3426,7 @@ local aa = {
             local l, m, n =
                 ai(
                     "Frame",
-                    {BackgroundTransparency = 1, Position = UDim2.fromOffset(7, 0), Size = UDim2.new(1, -14, 1, 0)},
+                    {BackgroundTransparency = 1, Position = UDim2.fromOffset(35, 0), Size = UDim2.new(1, -70, 1, 0)},
                     {k}
                 ),
                 ai(
@@ -3423,7 +3445,7 @@ local aa = {
                         BackgroundColor3 = Color3.fromRGB(255, 255, 255),
                         BackgroundTransparency = 1,
                         Size = UDim2.new(0, 100, 0, 14),
-                        Position = UDim2.new(0, -4, 0.5, 0),
+                        Position = UDim2.new(1, -4, 0.5, 0),
                         AnchorPoint = Vector2.new(1, 0.5),
                         ThemeTag = {TextColor3 = "SubText"}
                     }
@@ -3436,17 +3458,30 @@ local aa = {
                     AnchorPoint = Vector2.new(1, 0.5),
                     Position = UDim2.new(1, -10, 0.5, 0),
                     BackgroundTransparency = 0.4,
-                    Parent = j.Frame,
+                    Parent = l,
                     ThemeTag = {BackgroundColor3 = "SliderRail"}
                 },
                 {
                     ai("UICorner", {CornerRadius = UDim.new(1, 0)}),
                     ai("UISizeConstraint", {MaxSize = Vector2.new(150, math.huge)}),
                     n,
-                    m,
-                    l
+                    m
                 }
             )
+            l.Parent = j.Frame
+
+            -- Função para incrementar/decrementar
+            local function stepValue(delta)
+                local novo = h.Value + delta
+                h:SetValue(novo)
+            end
+            ah.AddSignal(btnPlus.MouseButton1Click, function()
+                stepValue(h.Rounding)
+            end)
+            ah.AddSignal(btnMinus.MouseButton1Click, function()
+                stepValue(-h.Rounding)
+            end)
+
             ah.AddSignal(
                 k.InputBegan,
                 function(p)
@@ -3481,9 +3516,7 @@ local aa = {
                 s(h.Value)
             end
             function h.SetValue(p, s)
-                local clamped = math.clamp(s, h.Min, h.Max)
-                local stepped = h.Min + math.floor((clamped - h.Min) / h.Increment + 0.5) * h.Increment
-                p.Value = g:Round(stepped, h.Rounding)
+                p.Value = g:Round(math.clamp(s, h.Min, h.Max), h.Rounding)
                 k.Position = UDim2.new((p.Value - h.Min) / (h.Max - h.Min), -7, 0.5, 0)
                 m.Size = UDim2.fromScale((p.Value - h.Min) / (h.Max - h.Min), 1)
                 n.Text = tostring(p.Value)
@@ -4768,6 +4801,20 @@ local aa = {
                 end
             )
         end
+                      "should complete",
+                        function()
+                            expect(ah._state.complete).to.equal(true)
+                        end
+                    )
+                    it(
+                        "should be exactly the goal value when completed",
+                        function()
+                            expect(ah._state.value).to.equal(0)
+                        end
+                    )
+                end
+            )
+        end
     end,
     [39] = function()
         local aa, ab, ac, ad, ae = b(39)
@@ -4811,150 +4858,7 @@ local aa = {
             return coroutine.yield()
         end
         return ag
-    end,
-    [40] = function()
-        local aa, ab, ac, ad, ae = b(40)
-        return function()
-            local af = ac(ab.Parent.Signal)
-            it(
-                "should invoke all connections, instantly",
-                function()
-                    local ag, ah, aj = (af.new())
-                    ag:connect(
-                        function(c)
-                            ah = c
-                        end
-                    )
-                    ag:connect(
-                        function(c)
-                            aj = c
-                        end
-                    )
-                    ag:fire "hello"
-                    expect(ah).to.equal "hello"
-                    expect(aj).to.equal "hello"
-                end
-            )
-            it(
-                "should return values when :wait() is called",
-                function()
-                    local ag = af.new()
-                    spawn(
-                        function()
-                            ag:fire(123, "hello")
-                        end
-                    )
-                    local ah, aj = ag:wait()
-                    expect(ah).to.equal(123)
-                    expect(aj).to.equal "hello"
-                end
-            )
-            it(
-                "should properly handle disconnections",
-                function()
-                    local ag, ah = af.new(), false
-                    local aj =
-                        ag:connect(
-                        function()
-                            ah = true
-                        end
-                    )
-                    aj:disconnect()
-                    ag:fire()
-                    expect(ah).to.equal(false)
-                end
-            )
-        end
-    end,
-    [41] = function()
-        local aa, ab, ac, ad, ae = b(41)
-        local af = ac(ab.Parent.BaseMotor)
-        local ag = setmetatable({}, af)
-        ag.__index = ag
-        function ag.new(ah, aj)
-            assert(ah, "Missing argument #1: initialValue")
-            assert(typeof(ah) == "number", "initialValue must be a number!")
-            local c = setmetatable(af.new(), ag)
-            if aj ~= nil then
-                c._useImplicitConnections = aj
-            else
-                c._useImplicitConnections = true
-            end
-            c._goal = nil
-            c._state = {complete = true, value = ah}
-            return c
-        end
-        function ag.step(ah, aj)
-            if ah._state.complete then
-                return true
-            end
-            local c = ah._goal:step(ah._state, aj)
-            ah._state = c
-            ah._onStep:fire(c.value)
-            if c.complete then
-                if ah._useImplicitConnections then
-                    ah:stop()
-                end
-                ah._onComplete:fire()
-            end
-            return c.complete
-        end
-        function ag.getValue(ah)
-            return ah._state.value
-        end
-        function ag.setGoal(ah, aj)
-            ah._state.complete = false
-            ah._goal = aj
-            ah._onStart:fire()
-            if ah._useImplicitConnections then
-                ah:start()
-            end
-        end
-        function ag.__tostring(ah)
-            return "Motor(Single)"
-        end
-        return ag
-    end,
-    [42] = function()
-        local aa, ab, ac, ad, ae = b(42)
-        return function()
-            local af, ag = ac(ab.Parent.SingleMotor), ac(ab.Parent.Instant)
-            it(
-                "should assign new state on step",
-                function()
-                    local ah = af.new(0, false)
-                    ah:setGoal(ag.new(5))
-                    ah:step(1.6666666666666665E-2)
-                    expect(ah._state.complete).to.equal(true)
-                    expect(ah._state.value).to.equal(5)
-                end
-            )
-            it(
-                [[should invoke onComplete listeners when the goal is completed]],
-                function()
-                    local ah, aj = af.new(0, false), false
-                    ah:onComplete(
-                        function()
-                            aj = true
-                        end
-                    )
-                    ah:setGoal(ag.new(5))
-                    ah:step(1.6666666666666665E-2)
-                    expect(aj).to.equal(true)
-                end
-            )
-            it(
-                "should start when the goal is set",
-                function()
-                    local ah, aj = af.new(0, false), false
-                    ah:onStart(
-                        function()
-                            aj = not aj
-                        end
-                    )
-                    ah:setGoal(ag.new(5))
-                    expect(aj).to.equal(true)
-                    ah:setGoal(ag.new(5))
+))
                     expect(aj).to.equal(false)
                 end
             )
