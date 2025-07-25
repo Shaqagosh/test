@@ -3430,12 +3430,15 @@ local aa = {
                     Size = UDim2.fromOffset(btnSize, btnSize),
                     Position = UDim2.new(0, 0, 0.5, 0),
                     AnchorPoint = Vector2.new(0, 0.5),
-                    BackgroundTransparency = 0.9,
+                    BackgroundTransparency = 0.5, -- Reduzido para maior visibilidade
+                    BackgroundColor3 = Color3.fromRGB(120, 120, 120), -- Fallback
                     Text = "-",
+                    TextTransparency = 0, -- Garantir texto visível
                     FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json"),
                     TextSize = 14,
-                    TextColor3 = Color3.fromRGB(200, 200, 200),
-                    ThemeTag = {BackgroundColor3 = "SliderRail", TextColor3 = "Text"}
+                    TextColor3 = Color3.fromRGB(200, 200, 200), -- Fallback
+                    ThemeTag = {BackgroundColor3 = "SliderRail", TextColor3 = "Text"},
+                    Parent = j.Frame -- Definir Parent explicitamente
                 },
                 {
                     ai("UICorner", {CornerRadius = UDim.new(0, 4)}),
@@ -3448,12 +3451,15 @@ local aa = {
                     Size = UDim2.fromOffset(btnSize, btnSize),
                     Position = UDim2.new(1, -(btnSize + btnPadding), 0.5, 0),
                     AnchorPoint = Vector2.new(1, 0.5),
-                    BackgroundTransparency = 0.9,
+                    BackgroundTransparency = 0.5, -- Reduzido para maior visibilidade
+                    BackgroundColor3 = Color3.fromRGB(120, 120, 120), -- Fallback
                     Text = "+",
+                    TextTransparency = 0, -- Garantir texto visível
                     FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json"),
                     TextSize = 14,
-                    TextColor3 = Color3.fromRGB(200, 200, 200),
-                    ThemeTag = {BackgroundColor3 = "SliderRail", TextColor3 = "Text"}
+                    TextColor3 = Color3.fromRGB(200, 200, 200), -- Fallback
+                    ThemeTag = {BackgroundColor3 = "SliderRail", TextColor3 = "Text"},
+                    Parent = j.Frame -- Definir Parent explicitamente
                 },
                 {
                     ai("UICorner", {CornerRadius = UDim.new(0, 4)}),
@@ -3464,9 +3470,9 @@ local aa = {
                 ai(
                 "Frame",
                 {
-                    Size = UDim2.new(1, -(btnSize * 2 + btnPadding * 2), 0, 4),
+                    Size = UDim2.new(1, -(btnSize * 2 + btnPadding * 2 + 100), 0, 4), -- Ajustado para TextLabel
                     AnchorPoint = Vector2.new(1, 0.5),
-                    Position = UDim2.new(1, -(btnSize + btnPadding + 10), 0.5, 0),
+                    Position = UDim2.new(1, -(btnSize + btnPadding + 104), 0.5, 0), -- Ajustado para TextLabel
                     BackgroundTransparency = 0.4,
                     Parent = j.Frame,
                     ThemeTag = {BackgroundColor3 = "SliderRail"}
@@ -3509,7 +3515,7 @@ local aa = {
                         i and
                             (p.UserInputType == Enum.UserInputType.MouseMovement or
                                 p.UserInputType == Enum.UserInputType.Touch)
-                        then
+                     then
                         local s = math.clamp((p.Position.X - l.AbsolutePosition.X) / l.AbsoluteSize.X, 0, 1)
                         h:SetValue(h.Min + ((h.Max - h.Min) * s))
                     end
