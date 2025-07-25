@@ -3472,7 +3472,7 @@ local aa = {
                 {
                     Size = UDim2.new(1, -(btnSize * 2 + btnPadding * 2 + 100), 0, 4), -- Ajustado para TextLabel
                     AnchorPoint = Vector2.new(1, 0.5),
-                    Position = UDim2.new(1, -(btnSize + btnPadding + 104), 0.5, 0), -- Ajustado para TextLabel
+                    Position = UDim2.new(1, -(btnSize + btnPadding + 104), 1.5, 4), -- Ajustado para TextLabel
                     BackgroundTransparency = 0.4,
                     Parent = j.Frame,
                     ThemeTag = {BackgroundColor3 = "SliderRail"}
