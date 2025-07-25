@@ -2338,7 +2338,11 @@ local aa = {
                         ),
                         s(
                             "Frame",
-                            {Size = UDim2.fromOffset(12, 190), Position = UDim2.fromOffset(210, 55), Parent = C.Root},
+                            {
+                                Size = UDim2.fromOffset(12, 190),
+                                Position = UDim2.fromOffset(210, 55),
+                                Parent = C.Root
+                            },
                             {s("UICorner", {CornerRadius = UDim.new(1, 0)}), R, S}
                         ),
                         H()
@@ -3435,7 +3439,7 @@ local aa = {
                     l
                 }
             )
-            // --- Adicionando botões + e - ---
+            -- Botões + e -
             local btnSize = 24
             local btnPadding = 4
             local minusBtn = ai(
@@ -3482,7 +3486,7 @@ local aa = {
             ah.AddSignal(plusBtn.MouseButton1Click, function()
                 h:SetValue((h.Value or f.Default) + (f.Rounding or 1))
             end)
-            // --- Fim dos botões ---
+            -- Fim dos botões
             ah.AddSignal(
                 k.InputBegan,
                 function(p)
