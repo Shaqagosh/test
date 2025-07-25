@@ -987,7 +987,7 @@ local aa = {
                     AutomaticSize = Enum.AutomaticSize.Y,
                     BackgroundColor3 = Color3.fromRGB(255, 255, 255),
                     BackgroundTransparency = 1,
-                    Position = UDim2.fromOffset(14, 40),
+                    Position = UDim.fromOffset(14, 40),
                     Size = UDim2.new(1, -28, 0, 0)
                 },
                 {
@@ -1468,7 +1468,7 @@ local aa = {
                                 "ImageLabel",
                                 {
                                     Image = o,
-                                    Size = UDim.fromOffset(16, 16),
+                                    Size = UDim2.fromOffset(16, 16),
                                     Position = UDim2.fromScale(0.5, 0.5),
                                     AnchorPoint = Vector2.new(0.5, 0.5),
                                     BackgroundTransparency = 1,
@@ -1637,7 +1637,7 @@ local aa = {
                     )
                 },
                 false
-            local A, B = false
+            local A, B = false, false
             local C = false
             v.AcrylicPaint = n.AcrylicPaint()
             local D, E =
@@ -1860,9 +1860,11 @@ local aa = {
                 end
             )
             m.AddSignal(
-                v.TabHolder.UIListLayout:GetPropertyChangedSignal "AbsoluteContentSize",
+                v.TabHolder:GetPropertyChangedSignal "CanvasPosition",
                 function()
-                    v.TabHolder.CanvasSize = UDim2.new(0, 0, 0, v.TabHolder.UIListLayout.AbsoluteContentSize.Y)
+                    I = N:GetCurrentTabPos() + 16
+                    J = 0
+                    v.SelectorPosMotor:setGoal(r(N:GetCurrentTabPos()))
                 end
             )
             m.AddSignal(
@@ -1939,14 +1941,6 @@ local aa = {
             function v.SelectTab(O, P)
                 N:SelectTab(1)
             end
-            m.AddSignal(
-                v.TabHolder:GetPropertyChangedSignal "CanvasPosition",
-                function()
-                    I = N:GetCurrentTabPos() + 16
-                    J = 0
-                    v.SelectorPosMotor:setGoal(r(N:GetCurrentTabPos()))
-                end
-            )
             return v
         end
     end,
@@ -2244,7 +2238,7 @@ local aa = {
                         s(
                             "ImageLabel",
                             {
-                                Size = UDim2.fromOffset(18, 18),
+                                Size = UDim2.new(0, 18, 0, 18),
                                 ScaleType = Enum.ScaleType.Fit,
                                 AnchorPoint = Vector2.new(0.5, 0.5),
                                 BackgroundTransparency = 1,
@@ -2255,11 +2249,13 @@ local aa = {
                         s(
                             "ImageLabel",
                             {
-                                Size = UDim2.fromOffset(180, 160),
-                                Position = UDim2.fromOffset(20, 55),
-                                Image = "rbxassetid://4155801252",
-                                BackgroundColor3 = z.Value,
-                                BackgroundTransparency = 0,
+                                Image = "http://www.roblox.com/asset/?id=14204231522",
+                                ImageTransparency = 0.45,
+                                ScaleType = Enum.ScaleType.Tile,
+                                TileSize = UDim2.fromOffset(40, 40),
+                                BackgroundTransparency = 1,
+                                Position = UDim2.fromOffset(112, 220),
+                                Size = UDim2.fromOffset(88, 24),
                                 Parent = C.Root
                             },
                             {s("UICorner", {CornerRadius = UDim.new(0, 4)}), K}
@@ -2282,7 +2278,7 @@ local aa = {
                                 ScaleType = Enum.ScaleType.Tile,
                                 TileSize = UDim2.fromOffset(40, 40),
                                 BackgroundTransparency = 1,
-                                Position = UDim2.fromOffset(112, 220),
+                                Position = UDim2.fromOffset(20, 220),
                                 Size = UDim2.fromOffset(88, 24),
                                 Parent = C.Root
                             },
@@ -2306,7 +2302,7 @@ local aa = {
                                 ScaleType = Enum.ScaleType.Tile,
                                 TileSize = UDim2.fromOffset(40, 40),
                                 BackgroundTransparency = 1,
-                                Position = UDim2.fromOffset(20, 220),
+                                Position = UDim2.fromOffset(112, 220),
                                 Size = UDim2.fromOffset(88, 24),
                                 Parent = C.Root
                             },
@@ -3068,7 +3064,6 @@ local aa = {
             k.Options[i] = l
             return l
         end
-        return g
     end,
     [23] = function()
         local aa, ab, ac, ad, ae = b(23)
@@ -3383,48 +3378,12 @@ local aa = {
             j.DescLabel.Size = UDim2.new(1, -170, 0, 14)
             h.SetTitle = j.SetTitle
             h.SetDesc = j.SetDesc
-
-            -- Botão de diminuir
-            local btnMinus = ai(
-                "TextButton",
-                {
-                    Size = UDim2.fromOffset(24, 24),
-                    Position = UDim2.new(0, 0, 0.5, 0),
-                    AnchorPoint = Vector2.new(0, 0.5),
-                    BackgroundTransparency = 0.2,
-                    Text = "-",
-                    Font = Enum.Font.SourceSansBold,
-                    TextSize = 18,
-                    TextColor3 = Color3.fromRGB(240, 240, 240),
-                    ThemeTag = {BackgroundColor3 = "Element", TextColor3 = "Text"},
-                    Parent = j.Frame
-                },
-                {ai("UICorner", {CornerRadius = UDim.new(1, 0)})}
-            )
-            -- Botão de aumentar
-            local btnPlus = ai(
-                "TextButton",
-                {
-                    Size = UDim2.fromOffset(24, 24),
-                    Position = UDim2.new(1, -24, 0.5, 0),
-                    AnchorPoint = Vector2.new(0, 0.5),
-                    BackgroundTransparency = 0.2,
-                    Text = "+",
-                    Font = Enum.Font.SourceSansBold,
-                    TextSize = 18,
-                    TextColor3 = Color3.fromRGB(240, 240, 240),
-                    ThemeTag = {BackgroundColor3 = "Element", TextColor3 = "Text"},
-                    Parent = j.Frame
-                },
-                {ai("UICorner", {CornerRadius = UDim.new(1, 0)})}
-            )
-
-            -- Slider visual (ajustado para não sobrepor os botões)
-            local k = ai(
+            local k =
+                ai(
                 "ImageLabel",
                 {
                     AnchorPoint = Vector2.new(0, 0.5),
-                    Position = UDim2.new(0, 28, 0.5, 0),
+                    Position = UDim2.new(0, -7, 0.5, 0),
                     Size = UDim2.fromOffset(14, 14),
                     Image = "http://www.roblox.com/asset/?id=12266946128",
                     ThemeTag = {ImageColor3 = "Accent"}
@@ -3433,7 +3392,7 @@ local aa = {
             local l, m, n =
                 ai(
                     "Frame",
-                    {BackgroundTransparency = 1, Position = UDim2.fromOffset(35, 0), Size = UDim2.new(1, -70, 1, 0)},
+                    {BackgroundTransparency = 1, Position = UDim2.fromOffset(7, 0), Size = UDim2.new(1, -14, 1, 0)},
                     {k}
                 ),
                 ai(
@@ -3452,12 +3411,11 @@ local aa = {
                         BackgroundColor3 = Color3.fromRGB(255, 255, 255),
                         BackgroundTransparency = 1,
                         Size = UDim2.new(0, 100, 0, 14),
-                        Position = UDim2.new(1, -4, 0.5, 0),
+                        Position = UDim2.new(0, -4, 0.5, 0),
                         AnchorPoint = Vector2.new(1, 0.5),
                         ThemeTag = {TextColor3 = "SubText"}
                     }
                 )
-
             local o =
                 ai(
                 "Frame",
@@ -3466,29 +3424,81 @@ local aa = {
                     AnchorPoint = Vector2.new(1, 0.5),
                     Position = UDim2.new(1, -10, 0.5, 0),
                     BackgroundTransparency = 0.4,
-                    Parent = l,
+                    Parent = j.Frame,
                     ThemeTag = {BackgroundColor3 = "SliderRail"}
                 },
                 {
                     ai("UICorner", {CornerRadius = UDim.new(1, 0)}),
                     ai("UISizeConstraint", {MaxSize = Vector2.new(150, math.huge)}),
                     n,
-                    m
+                    m,
+                    l
                 }
             )
-            l.Parent = j.Frame
-
-            -- Função para incrementar/decrementar
-            local function stepValue(delta)
-                local novo = h.Value + delta
-                h:SetValue(novo)
-            end
-            ah.AddSignal(btnPlus.MouseButton1Click, function()
-                stepValue(h.Rounding)
+            // --- Adicionando botões + e - ---
+            local btnSize = 24
+            local btnPadding = 4
+            local minusBtn = ai(
+                "TextButton",
+                {
+                    Size = UDim2.fromOffset(btnSize, btnSize),
+                    Position = UDim2.new(0, 0, 0.5, -btnSize/2),
+                    AnchorPoint = Vector2.new(0, 0.5),
+                    BackgroundTransparency = 0.9,
+                    Text = "-",
+                    Font = Enum.Font.GothamBold,
+                    TextSize = 18,
+                    TextColor3 = Color3.fromRGB(240,240,240),
+                    ThemeTag = {BackgroundColor3 = "DialogButton"},
+                    Parent = j.Frame
+                },
+                {
+                    ai("UICorner", {CornerRadius = UDim.new(0, 5)}),
+                    ai("UIStroke", {Transparency = 0.5, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, ThemeTag = {Color = "DialogButtonBorder"}})
+                }
+            )
+            local plusBtn = ai(
+                "TextButton",
+                {
+                    Size = UDim2.fromOffset(btnSize, btnSize),
+                    Position = UDim2.new(1, -(btnSize+btnPadding), 0.5, -btnSize/2),
+                    AnchorPoint = Vector2.new(1, 0.5),
+                    BackgroundTransparency = 0.9,
+                    Text = "+",
+                    Font = Enum.Font.GothamBold,
+                    TextSize = 18,
+                    TextColor3 = Color3.fromRGB(240,240,240),
+                    ThemeTag = {BackgroundColor3 = "DialogButton"},
+                    Parent = j.Frame
+                },
+                {
+                    ai("UICorner", {CornerRadius = UDim.new(0, 5)}),
+                    ai("UIStroke", {Transparency = 0.5, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, ThemeTag = {Color = "DialogButtonBorder"}})
+                }
+            )
+            ah.AddSignal(minusBtn.MouseButton1Click, function()
+                h:SetValue((h.Value or f.Default) - (f.Rounding or 1))
             end)
-            ah.AddSignal(btnMinus.MouseButton1Click, function()
-                stepValue(-h.Rounding)
+            ah.AddSignal(plusBtn.MouseButton1Click, function()
+                h:SetValue((h.Value or f.Default) + (f.Rounding or 1))
             end)
+            // --- Fim dos botões ---
+            ah.AddSignal(
+                k.InputBegan,
+                function(p)
+                    if p.UserInputType == Enum.UserInputType.MouseButton1 or p.UserInputType == Enum.UserInputType.Touch then
+                        i = true
+                    end
+                end
+            )
+            ah.AddSignal(
+                k.InputEnded,
+                function(p)
+                    if p.UserInputType == Enum.UserInputType.MouseButton1 or p.UserInputType == Enum.UserInputType.Touch then
+                        i = false
+                    end
+                end
+            )
             ah.AddSignal(
                 af.InputChanged,
                 function(p)
@@ -4526,7 +4536,7 @@ local aa = {
     end,
     [33] = function()
         local aa, ab, ac, ad, ae = b(33)
-        local af, ag, ah = ac(ab.Parent.GroupMotor), ac(ab.Parent.Instant), ac(ab.Parent.Spring)
+        local af, ag, ah = ac(ab.Parent.BaseMotor), ac(ab.Parent.SingleMotor), ac(ab.Parent.isMotor)
         local ai = setmetatable({}, af)
         ai.__index = ai
         local aj = function(aj)
@@ -4793,336 +4803,6 @@ local aa = {
             )
         end
     end,
-    [39] = function()
-        local aa, ab, ac, ad, ae = b(39)
-        local af = {}
-        af.__index = af
-        function af.new(ag, ah)
-            return setmetatable({signal = ag, connected = true, _handler = ah}, af)
-        end
-        function af.disconnect(ag)
-            if ag.connected then
-                ag.connected = false
-                for ah, ai in pairs(ag.signal._connections) do
-                    if ai == ag then
-                        table.remove(ag.signal._connections, ah)
-                        return
-                    end
-                end
-            end
-        end
-        local ag = {}
-        ag.__index = ag
-        function ag.new()
-            return setmetatable({_connections = {}, _threads = {}}, ag)
-        end
-        function ag.fire(ah, ...)
-            for ai, aj in pairs(ah._connections) do
-                aj._handler(...)
-            end
-            for c, d in pairs(ah._threads) do
-                coroutine.resume(d, ...)
-            end
-            ah._threads = {}
-        end
-        function ag.connect(ah, aj)
-            local c = af.new(ah, aj)
-            table.insert(ah._connections, c)
-            return c
-        end
-        function ag.wait(ah)
-            table.insert(ah._threads, coroutine.running())
-            return coroutine.yield()
-        end
-        return ag
-    end,
-    [40] = function()
-        local aa, ab, ac, ad, ae = b(40)
-        return function()
-            local af = ac(ab.Parent.Signal)
-            it(
-                "should invoke all connections, instantly",
-                function()
-                    local ag, ah, aj = (af.new())
-                    ag:connect(
-                        function(c)
-                            ah = c
-                        end
-                    )
-                    ag:connect(
-                        function(c)
-                            aj = c
-                        end
-                    )
-                    ag:fire "hello"
-                    expect(ah).to.equal "hello"
-                    expect(aj).to.equal "hello"
-                end
-            )
-            it(
-                "should return values when :wait() is called",
-                function()
-                    local ag = af.new()
-                    spawn(
-                        function()
-                            ag:fire(123, "hello")
-                        end
-                    )
-                    local ah, aj = ag:wait()
-                    expect(ah).to.equal(123)
-                    expect(aj).to.equal "hello"
-                end
-            )
-            it(
-                "should properly handle disconnections",
-                function()
-                    local ag, ah = af.new(), false
-                    local aj =
-                        ag:connect(
-                        function()
-                            ah = true
-                        end
-                    )
-                    aj:disconnect()
-                    ag:fire()
-                    expect(ah).to.equal(false)
-                end
-            )
-        end
-    end,
-    [41] = function()
-        local aa, ab, ac, ad, ae = b(41)
-        local af = ac(ab.Parent.BaseMotor)
-        local ag = setmetatable({}, af)
-        ag.__index = ag
-        function ag.new(ah, aj)
-            assert(ah, "Missing argument #1: initialValue")
-            assert(typeof(ah) == "number", "initialValue must be a number!")
-            local c = setmetatable(af.new(), ag)
-            if aj ~= nil then
-                c._useImplicitConnections = aj
-            else
-                c._useImplicitConnections = true
-            end
-            c._goal = nil
-            c._state = {complete = true, value = ah}
-            return c
-        end
-        function ag.step(ah, aj)
-            if ah._state.complete then
-                return true
-            end
-            local c = ah._goal:step(ah._state, aj)
-            ah._state = c
-            ah._onStep:fire(c.value)
-            if c.complete then
-                if ah._useImplicitConnections then
-                    ah:stop()
-                end
-                ah._onComplete:fire()
-            end
-            return c.complete
-        end
-        function ag.getValue(ah)
-            return ah._state.value
-        end
-        function ag.setGoal(ah, aj)
-            ah._state.complete = false
-            ah._goal = aj
-            ah._onStart:fire()
-            if ah._useImplicitConnections then
-                ah:start()
-            end
-        end
-        function ag.__tostring(ah)
-            return "Motor(Single)"
-        end
-        return ag
-    end,
-    [42] = function()
-        local aa, ab, ac, ad, ae = b(42)
-        return function()
-            local af, ag = ac(ab.Parent.SingleMotor), ac(ab.Parent.Instant)
-            it(
-                "should assign new state on step",
-                function()
-                    local ah = af.new(0, false)
-                    ah:setGoal(ag.new(5))
-                    ah:step(1.6666666666666665E-2)
-                    expect(ah._state.complete).to.equal(true)
-                    expect(ah._state.value).to.equal(5)
-                end
-            )
-            it(
-                [[should invoke onComplete listeners when the goal is completed]],
-                function()
-                    local ah, aj = af.new(0, false), false
-                    ah:onComplete(
-                        function()
-                            aj = true
-                        end
-                    )
-                    ah:setGoal(ag.new(5))
-                    ah:step(1.6666666666666665E-2)
-                    expect(aj).to.equal(true)
-                end
-            )
-            it(
-                "should start when the goal is set",
-                function()
-                    local ah, aj = af.new(0, false), false
-                    ah:onStart(
-                        function()
-                            aj = not aj
-                        end
-                    )
-                    ah:setGoal(ag.new(5))
-                    expect(aj).to.equal(true)
-                    ah:setGoal(ag.new(5))
-                    expect(aj).to.equal(false)
-                end
-            )
-        end
-    end,
-    [43] = function()
-        local aa, ab, ac, ad, ae = b(43)
-        local af, ag, ah, aj = 0.001, 0.001, 0.0001, {}
-        aj.__index = aj
-        function aj.new(c, d)
-            assert(c, "Missing argument #1: targetValue")
-            d = d or {}
-            return setmetatable(
-                {_targetValue = c, _frequency = d.frequency or 4, _dampingRatio = d.dampingRatio or 1},
-                aj
-            )
-        end
-        function aj.step(c, d, e)
-            local f, g, h, i, j = c._dampingRatio, c._frequency * 2 * math.pi, c._targetValue, d.value, d.velocity or 0
-            local k, l, m, n = i - h, (math.exp(-f * g * e))
-            if f == 1 then
-                m = (k * (1 + g * e) + j * e) * l + h
-                n = (j * (1 - g * e) - k * (g * g * e)) * l
-            elseif f < 1 then
-                local o = math.sqrt(1 - f * f)
-                local p, s, t = math.cos(g * o * e), (math.sin(g * o * e))
-                if o > ah then
-                    t = s / o
-                else
-                    local u = e * g
-                    t = u + ((u * u) * (o * o) * (o * o) / 20 - o * o) * (u * u * u) / 6
-                end
-                local u
-                if g * o > ah then
-                    u = s / (g * o)
-                else
-                    local v = g * o
-                    u = e + ((e * e) * (v * v) * (v * v) / 20 - v * v) * (e * e * e) / 6
-                end
-                m = (k * (p + f * t) + j * u) * l + h
-                n = (j * (p - t * f) - k * (t * g)) * l
-            else
-                local o = math.sqrt(f * f - 1)
-                local p, s = -g * (f - o), -g * (f + o)
-                local t = (j - k * p) / (2 * g * o)
-                local u = k - t
-                local v, w = u * math.exp(p * e), t * math.exp(s * e)
-                m = v + w + h
-                n = v * p + w * s
-            end
-            local o = math.abs(n) < af and math.abs(m - h) < ag
-            return {complete = o, value = o and h or m, velocity = n}
-        end
-        return aj
-    end,
-    [44] = function()
-        local aa, ab, ac, ad, ae = b(44)
-        return function()
-            local af, ag = ac(ab.Parent.SingleMotor), ac(ab.Parent.Spring)
-            describe(
-                "completed state",
-                function()
-                    local ah, aj = af.new(0, false), ag.new(1, {frequency = 2, dampingRatio = 0.75})
-                    ah:setGoal(aj)
-                    for c = 1, 100 do
-                        ah:step(1.6666666666666665E-2)
-                    end
-                    it(
-                        "should complete",
-                        function()
-                            expect(ah._state.complete).to.equal(true)
-                        end
-                    )
-                    it(
-                        "should be exactly the goal value when completed",
-                        function()
-                            expect(ah._state.value).to.equal(1)
-                        end
-                    )
-                end
-            )
-            it(
-                "should inherit velocity",
-                function()
-                    local ah = af.new(0, false)
-                    ah._state = {complete = false, value = 0, velocity = -5}
-                    local aj = ag.new(1, {frequency = 2, dampingRatio = 1})
-                    ah:setGoal(aj)
-                    ah:step(1.6666666666666665E-2)
-                    expect(ah._state.velocity < 0).to.equal(true)
-                end
-            )
-        end
-    end,
-    [45] = function()
-        local aa, ab, ac, ad, ae = b(45)
-        local af = function(af)
-            local ag = tostring(af):match "^Motor%((.+)%)$"
-            if ag then
-                return true, ag
-            else
-                return false
-            end
-        end
-        return af
-    end,
-    [46] = function()
-        local aa, ab, ac, ad, ae = b(46)
-        return function()
-            local af, ag, ah = ac(ab.Parent.isMotor), ac(ab.Parent.SingleMotor), ac(ab.Parent.GroupMotor)
-            local aj, c = ag.new(0), ah.new {}
-            it(
-                "should properly detect motors",
-                function()
-                    expect(af(aj)).to.equal(true)
-                    expect(af(c)).to.equal(true)
-                end
-            )
-            it(
-                "shouldn't detect things that aren't motors",
-                function()
-                    expect(af {}).to.equal(false)
-                end
-            )
-            it(
-                "should return the proper motor type",
-                function()
-                    local d, e = af(aj)
-                    local f, g = af(c)
-                    expect(e).to.equal "Single"
-                    expect(g).to.equal "Group"
-                end
-            )
-        end
-    end,
-    [47] = function()
-        local aa, ab, ac, ad, ae = b(47)
-        local af = {Names = {"Dark", "Darker", "Light", "Aqua", "Amethyst", "Rose"}}
-        for ag, ah in next, ab:GetChildren() do
-            local aj = ac(ah)
-            af[aj.Name] = aj
-        end
-        return af
-    end,
     [48] = function()
         local aa, ab, ac, ad, ae = b(48)
         return {
@@ -5352,123 +5032,6 @@ local aa = {
         }
     end
 }
-do
-    local ab, ac, ad, ae, af, ag, ah, aj, c, e, f, g, h, i, j, k =
-        task,
-        setmetatable,
-        error,
-        newproxy,
-        getmetatable,
-        next,
-        table,
-        unpack,
-        coroutine,
-        script,
-        type,
-        require,
-        pcall,
-        getfenv,
-        setfenv,
-        rawget
-    local l, m, n, o, p, s, t, u, v, w, x = ah.insert, ah.remove, ah.freeze or function(l)
-                return l
-            end, ab and ab.defer or function(l, ...)
-                local m = c.create(l)
-                c.resume(m, ...)
-                return m
-            end, "0.0.0-venv", {}, {}, {}, {}, {}, {}
-    local y, z = {GetChildren = function(y)
-                local z, A = x[y], {}
-                for B in ag, z do
-                    l(A, B)
-                end
-                return A
-            end, FindFirstChild = function(y, z)
-                if not z then
-                    ad("Argument 1 missing or nil", 2)
-                end
-                for A in ag, x[y] do
-                    if A.Name == z then
-                        return A
-                    end
-                end
-                return
-            end, GetFullName = function(y)
-                local z, A = y.Name, y.Parent
-                while A do
-                    z = A.Name .. "." .. z
-                    A = A.Parent
-                end
-                return "VirtualEnv." .. z
-            end}, {}
-    for A, B in ag, y do
-        z[A] = function(C, ...)
-            if not x[C] then
-                ad("Expected ':' not '.' calling member function " .. A, 1)
-            end
-            return B(C, ...)
-        end
-    end
-    local C = function(C, D, E)
-        local F, G, H, I, J = ac({}, {__mode = "k"}), function(F)
-                ad(F .. " is not a valid (virtual) member of " .. C .. ' "' .. D .. '"', 1)
-            end, function(F)
-                ad("Unable to assign (virtual) property " .. F .. ". Property is read only", 1)
-            end, (ae(true))
-        local K = af(I)
-        K.__index = function(L, M)
-            if M == "ClassName" then
-                return C
-            elseif M == "Name" then
-                return D
-            elseif M == "Parent" then
-                return E
-            elseif C == "StringValue" and M == "Value" then
-                return J
-            else
-                local N = z[M]
-                if N then
-                    return N
-                end
-            end
-            for N in ag, F do
-                if N.Name == M then
-                    return N
-                end
-            end
-            G(M)
-        end
-        K.__newindex = function(L, M, N)
-            if M == "ClassName" then
-                H(M)
-            elseif M == "Name" then
-                D = N
-            elseif M == "Parent" then
-                if N == I then
-                    return
-                end
-                if E ~= nil then
-                    x[E][I] = nil
-                end
-                E = N
-                if N ~= nil then
-                    x[N][I] = true
-                end
-            elseif C == "StringValue" and M == "Value" then
-                J = N
-            else
-                G(M)
-            end
-        end
-        K.__tostring = function()
-            return D
-        end
-        x[I] = F
-        if E ~= nil then
-            x[E][I] = true
-        end
-        return I
-    end
     local function D(E, F)
         local G, H, I, J = E[1], E[2], E[3], E[4]
         local K = m(I, 1)
