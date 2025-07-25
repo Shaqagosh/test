@@ -3449,7 +3449,7 @@ local aa = {
                 "TextButton",
                 {
                     Size = UDim2.fromOffset(btnSize, btnSize),
-                    Position = UDim2.new(1, -(btnSize + btnPadding), 0.5, 0),
+                    Position = UDim2.new(1, -(btnSize + btnPadding), 0, 0.2),
                     AnchorPoint = Vector2.new(1, 0.5),
                     BackgroundTransparency = 0.5, -- Reduzido para maior visibilidade
                     BackgroundColor3 = Color3.fromRGB(120, 120, 120), -- Fallback
@@ -3472,7 +3472,7 @@ local aa = {
                 {
                     Size = UDim2.new(1, -(btnSize * 2 + btnPadding * 2 + 100), 0, 4), -- Ajustado para TextLabel
                     AnchorPoint = Vector2.new(1, 0.5),
-                    Position = UDim2.new(1, -(btnSize + btnPadding + 100), 0.5, 0), -- Ajustado para TextLabel
+                    Position = UDim2.new(1, -(btnSize + btnPadding + 104), 0.5, 0), -- Ajustado para TextLabel
                     BackgroundTransparency = 0.4,
                     Parent = j.Frame,
                     ThemeTag = {BackgroundColor3 = "SliderRail"}
