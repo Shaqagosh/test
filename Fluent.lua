@@ -795,7 +795,7 @@ local aa = {
                     AutomaticSize = Enum.AutomaticSize.Y,
                     BackgroundColor3 = Color3.fromRGB(255, 255, 255),
                     BackgroundTransparency = 1,
-                    Position = UDim2.fromOffset(10, 0),
+                    Position = UDim.fromOffset(10, 0),
                     Size = UDim2.new(1, -28, 0, 0)
                 },
                 {
@@ -1324,814 +1324,294 @@ local aa = {
     end,
     [15] = function()
         local c, d, e, f, g = b(15)
-        local h, i, j, k =
-            game:GetService "UserInputService",
-            game:GetService "TouchInputService",
-            game:GetService "RunService",
-            game:GetService "Players"
-        local l, m = j.RenderStepped, k.LocalPlayer
-        local n, o = m:GetMouse(), d.Parent.Parent
-        local p = e(o.Creator)
-        local s, t, u = p.New, o.Components, {}
-        u.__index = u
-        u.__type = "Colorpicker"
-        function u.New(v, w, x)
-            local y = v.Library
-            assert(x.Title, "Colorpicker - Missing Title")
-            assert(x.Default, "AddColorPicker: Missing default value.")
-            local z = {
-                Value = x.Default,
-                Transparency = x.Transparency or 0,
-                Type = "Colorpicker",
-                Title = type(x.Title) == "string" and x.Title or "Colorpicker",
-                Callback = x.Callback or function(z)
-                    end
-            }
-            function z.SetHSVFromRGB(A, B)
-                local C, D, E = Color3.toHSV(B)
-                z.Hue = C
-                z.Sat = D
-                z.Vib = E
-            end
-            z:SetHSVFromRGB(z.Value)
-            local A = e(t.Element)(x.Title, x.Description, v.Container, true)
-            z.SetTitle = A.SetTitle
-            z.SetDesc = A.SetDesc
-            local B =
-                s(
+        local h, i = game:GetService "TextService", d.Parent.Parent
+        local j, k = e(i.Packages.Flipper), e(i.Creator)
+        local l = k.New
+        return function(m, n)
+            n = n or false
+            local o = {}
+            o.Input =
+                l(
+                "TextBox",
+                {
+                    FontFace = Font.new "rbxasset://fonts/families/GothamSSm.json",
+                    TextColor3 = Color3.fromRGB(200, 200, 200),
+                    TextSize = 14,
+                    TextXAlignment = Enum.TextXAlignment.Left,
+                    TextYAlignment = Enum.TextYAlignment.Center,
+                    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+                    AutomaticSize = Enum.AutomaticSize.Y,
+                    BackgroundTransparency = 1,
+                    Size = UDim2.fromScale(1, 1),
+                    Position = UDim2.fromOffset(10, 0),
+                    ThemeTag = {TextColor3 = "Text", PlaceholderColor3 = "SubText"}
+                }
+            )
+            o.Container =
+                l(
                 "Frame",
-                {Size = UDim2.fromScale(1, 1), BackgroundColor3 = z.Value, Parent = A.Frame},
-                {s("UICorner", {CornerRadius = UDim.new(0, 4)})}
+                {
+                    BackgroundTransparency = 1,
+                    ClipsDescendants = true,
+                    Position = UDim2.new(0, 6, 0, 0),
+                    Size = UDim2.new(1, -12, 1, 0)
+                },
+                {o.Input}
             )
-            local aa, ab =
-                s(
-                    "ImageLabel",
-                    {
-                        Size = UDim2.fromOffset(26, 26),
-                        Position = UDim2.new(1, -10, 0.5, 0),
-                        AnchorPoint = Vector2.new(1, 0.5),
-                        Parent = A.Frame,
-                        Image = "http://www.roblox.com/asset/?id=14204231522",
-                        ImageTransparency = 0.45,
-                        ScaleType = Enum.ScaleType.Tile,
-                        TileSize = UDim2.fromOffset(40, 40)
-                    },
-                    {s("UICorner", {CornerRadius = UDim.new(0, 4)}), B}
-                ),
-                function()
-                    local C = e(t.Dialog):Create()
-                    C.Title.Text = z.Title
-                    C.Root.Size = UDim2.fromOffset(430, 330)
-                    local D, E, F, G, H, I =
-                        z.Hue,
-                        z.Sat,
-                        z.Vib,
-                        z.Transparency,
-                        function()
-                            local D = e(t.Textbox)()
-                            D.Frame.Parent = C.Root
-                            D.Frame.Size = UDim2.new(0, 90, 0, 32)
-                            return D
-                        end,
-                        function(D, E)
-                            return s(
-                                "TextLabel",
-                                {
-                                    FontFace = Font.new(
-                                        "rbxasset://fonts/families/GothamSSm.json",
-                                        Enum.FontWeight.Medium,
-                                        Enum.FontStyle.Normal
-                                    ),
-                                    Text = D,
-                                    TextColor3 = Color3.fromRGB(240, 240, 240),
-                                    TextSize = 13,
-                                    TextXAlignment = Enum.TextXAlignment.Left,
-                                    Size = UDim2.new(1, 0, 0, 32),
-                                    Position = E,
-                                    BackgroundTransparency = 1,
-                                    Parent = C.Root,
-                                    ThemeTag = {TextColor3 = "Text"}
-                                }
-                            )
-                        end
-                    local J, K =
-                        function()
-                            local J = Color3.fromHSV(D, E, F)
-                            return {R = math.floor(J.r * 255), G = math.floor(J.g * 255), B = math.floor(J.b * 255)}
-                        end,
-                        s(
-                            "ImageLabel",
-                            {
-                                Size = UDim2.fromOffset(18, 18),
-                                ScaleType = Enum.ScaleType.Fit,
-                                AnchorPoint = Vector2.new(0.5, 0.5),
-                                BackgroundTransparency = 1,
-                                Image = "http://www.roblox.com/asset/?id=4805639000"
-                            }
-                        )
-                    local L, M =
-                        s(
-                            "ImageLabel",
-                            {
-                                Size = UDim2.fromOffset(180, 160),
-                                Position = UDim2.fromOffset(20, 55),
-                                Image = "rbxassetid://4155801252",
-                                BackgroundColor3 = z.Value,
-                                BackgroundTransparency = 0,
-                                Parent = C.Root
-                            },
-                            {s("UICorner", {CornerRadius = UDim.new(0, 4)}), K}
-                        ),
-                        s(
-                            "Frame",
-                            {
-                                BackgroundColor3 = z.Value,
-                                Size = UDim2.fromScale(1, 1),
-                                BackgroundTransparency = z.Transparency
-                            },
-                            {s("UICorner", {CornerRadius = UDim.new(0, 4)})}
-                        )
-                    local N, O =
-                        s(
-                            "ImageLabel",
-                            {
-                                Image = "http://www.roblox.com/asset/?id=14204231522",
-                                ImageTransparency = 0.45,
-                                ScaleType = Enum.ScaleType.Tile,
-                                TileSize = UDim2.fromOffset(40, 40),
-                                BackgroundTransparency = 1,
-                                Position = UDim2.fromOffset(112, 220),
-                                Size = UDim2.fromOffset(88, 24),
-                                Parent = C.Root
-                            },
-                            {
-                                s("UICorner", {CornerRadius = UDim.new(0, 4)}),
-                                s("UIStroke", {Thickness = 2, Transparency = 0.75}),
-                                M
-                            }
-                        ),
-                        s(
-                            "Frame",
-                            {BackgroundColor3 = z.Value, Size = UDim2.fromScale(1, 1), BackgroundTransparency = 0},
-                            {s("UICorner", {CornerRadius = UDim.new(0, 4)})}
-                        )
-                    local P, Q =
-                        s(
-                            "ImageLabel",
-                            {
-                                Image = "http://www.roblox.com/asset/?id=14204231522",
-                                ImageTransparency = 0.45,
-                                ScaleType = Enum.ScaleType.Tile,
-                                TileSize = UDim2.fromOffset(40, 40),
-                                BackgroundTransparency = 1,
-                                Position = UDim2.fromOffset(20, 220),
-                                Size = UDim2.fromOffset(88, 24),
-                                Parent = C.Root
-                            },
-                            {
-                                s("UICorner", {CornerRadius = UDim.new(0, 4)}),
-                                s("UIStroke", {Thickness = 2, Transparency = 0.75}),
-                                O
-                            }
-                        ),
-                        {}
-                    for R = 0, 1, 0.1 do
-                        table.insert(Q, ColorSequenceKeypoint.new(R, Color3.fromHSV(R, 1, 1)))
-                    end
-                    local R, S =
-                        s("UIGradient", {Color = ColorSequence.new(Q), Rotation = 90}),
-                        s(
-                            "Frame",
-                            {
-                                Size = UDim2.new(1, 0, 1, -10),
-                                Position = UDim2.fromOffset(0, 5),
-                                BackgroundTransparency = 1
-                            }
-                        )
-                    local T, U, V =
-                        s(
-                            "ImageLabel",
-                            {
-                                Size = UDim2.fromOffset(14, 14),
-                                Image = "http://www.roblox.com/asset/?id=12266946128",
-                                Parent = S,
-                                ThemeTag = {ImageColor3 = "DialogInput"}
-                            }
-                        ),
-                        s(
-                            "Frame",
-                            {Size = UDim2.fromOffset(12, 190), Position = UDim2.fromOffset(210, 55), Parent = C.Root},
-                            {s("UICorner", {CornerRadius = UDim.new(1, 0)}), R, S}
-                        ),
-                        H()
-                    V.Frame.Position = UDim2.fromOffset(x.Transparency and 260 or 240, 55)
-                    I("Hex", UDim2.fromOffset(x.Transparency and 360 or 340, 55))
-                    local W = H()
-                    W.Frame.Position = UDim2.fromOffset(x.Transparency and 260 or 240, 95)
-                    I("Red", UDim2.fromOffset(x.Transparency and 360 or 340, 95))
-                    local X = H()
-                    X.Frame.Position = UDim2.fromOffset(x.Transparency and 260 or 240, 135)
-                    I("Green", UDim2.fromOffset(x.Transparency and 360 or 340, 135))
-                    local Y = H()
-                    Y.Frame.Position = UDim2.fromOffset(x.Transparency and 260 or 240, 175)
-                    I("Blue", UDim2.fromOffset(x.Transparency and 360 or 340, 175))
-                    local Z
-                    if x.Transparency then
-                        Z = H()
-                        Z.Frame.Position = UDim2.fromOffset(260, 215)
-                        I("Alpha", UDim2.fromOffset(360, 215))
-                    end
-                    local _, aa, ab
-                    if x.Transparency then
-                        local ac =
-                            s(
-                            "Frame",
-                            {
-                                Size = UDim2.new(1, 0, 1, -10),
-                                Position = UDim2.fromOffset(0, 5),
-                                BackgroundTransparency = 1
-                            }
-                        )
-                        aa =
-                            s(
-                            "ImageLabel",
-                            {
-                                Size = UDim2.fromOffset(14, 14),
-                                Image = "http://www.roblox.com/asset/?id=12266946128",
-                                Parent = ac,
-                                ThemeTag = {ImageColor3 = "DialogInput"}
-                            }
-                        )
-                        ab =
-                            s(
-                            "Frame",
-                            {Size = UDim2.fromScale(1, 1)},
-                            {
-                                s(
-                                    "UIGradient",
-                                    {
-                                        Transparency = NumberSequence.new {
-                                            NumberSequenceKeypoint.new(0, 0),
-                                            NumberSequenceKeypoint.new(1, 1)
-                                        },
-                                        Rotation = 270
-                                    }
-                                ),
-                                s("UICorner", {CornerRadius = UDim.new(1, 0)})
-                            }
-                        )
-                        _ =
-                            s(
-                            "Frame",
-                            {
-                                Size = UDim2.fromOffset(12, 190),
-                                Position = UDim2.fromOffset(230, 55),
-                                Parent = C.Root,
-                                BackgroundTransparency = 1
-                            },
-                            {
-                                s("UICorner", {CornerRadius = UDim.new(1, 0)}),
-                                s(
-                                    "ImageLabel",
-                                    {
-                                        Image = "http://www.roblox.com/asset/?id=14204231522",
-                                        ImageTransparency = 0.45,
-                                        ScaleType = Enum.ScaleType.Tile,
-                                        TileSize = UDim2.fromOffset(40, 40),
-                                        BackgroundTransparency = 1,
-                                        Size = UDim2.fromScale(1, 1),
-                                        Parent = C.Root
-                                    },
-                                    {s("UICorner", {CornerRadius = UDim.new(1, 0)})}
-                                ),
-                                ab,
-                                ac
-                            }
-                        )
-                    end
-                    local ac = function()
-                        L.BackgroundColor3 = Color3.fromHSV(D, 1, 1)
-                        T.Position = UDim2.new(0, -1, D, -6)
-                        K.Position = UDim2.new(E, 0, 1 - F, 0)
-                        O.BackgroundColor3 = Color3.fromHSV(D, E, F)
-                        V.Input.Text = "#" .. Color3.fromHSV(D, E, F):ToHex()
-                        W.Input.Text = J().R
-                        X.Input.Text = J().G
-                        Y.Input.Text = J().B
-                        if x.Transparency then
-                            ab.BackgroundColor3 = Color3.fromHSV(D, E, F)
-                            O.BackgroundTransparency = G
-                            aa.Position = UDim2.new(0, -1, 1 - G, -6)
-                            Z.Input.Text = e(o):Round((1 - G) * 100, 0) .. "%"
+            o.Indicator =
+                l(
+                "Frame",
+                {
+                    Size = UDim2.new(1, -4, 0, 1),
+                    Position = UDim2.new(0, 2, 1, 0),
+                    AnchorPoint = Vector2.new(0, 1),
+                    BackgroundTransparency = n and 0.5 or 0,
+                    ThemeTag = {BackgroundColor3 = n and "InputIndicator" or "DialogInputLine"}
+                }
+            )
+            o.Frame =
+                l(
+                "Frame",
+                {
+                    Size = UDim2.new(0, 0, 0, 30),
+                    BackgroundTransparency = n and 0.9 or 0,
+                    Parent = m,
+                    ThemeTag = {BackgroundColor3 = n and "Input" or "DialogInput"}
+                },
+                {
+                    l("UICorner", {CornerRadius = UDim.new(0, 4)}),
+                    l(
+                        "UIStroke",
+                        {
+                            ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+                            Transparency = n and 0.5 or 0.65,
+                            ThemeTag = {Color = n and "InElementBorder" or "DialogButtonBorder"}
+                        }
+                    ),
+                    o.Indicator,
+                    o.Container
+                }
+            )
+            local p = function()
+                local p, q = 2, o.Container.AbsoluteSize.X
+                if not o.Input:IsFocused() or o.Input.TextBounds.X <= q - 2 * p then
+                    o.Input.Position = UDim2.new(0, p, 0, 0)
+                else
+                    local r = o.Input.CursorPosition
+                    if r ~= -1 then
+                        local s = string.sub(o.Input.Text, 1, r - 1)
+                        local t = h:GetTextSize(s, o.Input.TextSize, o.Input.Font, Vector2.new(math.huge, math.huge)).X
+                        local u = o.Input.Position.X.Offset + t
+                        if u < p then
+                            o.Input.Position = UDim2.fromOffset(p - t, 0)
+                        elseif u > q - p - 1 then
+                            o.Input.Position = UDim2.fromOffset(q - t - p - 1, 0)
                         end
                     end
-                    p.AddSignal(
-                        V.Input.FocusLost,
-                        function(ad)
-                            if ad then
-                                local ae, af = pcall(Color3.fromHex, V.Input.Text)
-                                if ae and typeof(af) == "Color3" then
-                                    D, E, F = Color3.toHSV(af)
-                                end
-                            end
-                            ac()
-                        end
-                    )
-                    p.AddSignal(
-                        W.Input.FocusLost,
-                        function(ad)
-                            if ad then
-                                local ae = J()
-                                local af, ag = pcall(Color3.fromRGB, W.Input.Text, ae.G, ae.B)
-                                if af and typeof(ag) == "Color3" then
-                                    if tonumber(W.Input.Text) <= 255 then
-                                        D, E, F = Color3.toHSV(ag)
-                                    end
-                                end
-                            end
-                            ac()
-                        end
-                    )
-                    p.AddSignal(
-                        X.Input.FocusLost,
-                        function(ad)
-                            if ad then
-                                local ae = J()
-                                local af, ag = pcall(Color3.fromRGB, ae.R, X.Input.Text, ae.B)
-                                if af and typeof(ag) == "Color3" then
-                                    if tonumber(X.Input.Text) <= 255 then
-                                        D, E, F = Color3.toHSV(ag)
-                                    end
-                                end
-                            end
-                            ac()
-                        end
-                    )
-                    p.AddSignal(
-                        Y.Input.FocusLost,
-                        function(ad)
-                            if ad then
-                                local ae = J()
-                                local af, ag = pcall(Color3.fromRGB, ae.R, ae.G, Y.Input.Text)
-                                if af and typeof(ag) == "Color3" then
-                                    if tonumber(Y.Input.Text) <= 255 then
-                                        D, E, F = Color3.toHSV(ag)
-                                    end
-                                end
-                            end
-                            ac()
-                        end
-                    )
-                    if x.Transparency then
-                        p.AddSignal(
-                            Z.Input.FocusLost,
-                            function(ad)
-                                if ad then
-                                    pcall(
-                                        function()
-                                            local ae = tonumber(Z.Input.Text)
-                                            if ae >= 0 and ae <= 100 then
-                                                G = 1 - ae * 0.01
-                                            end
-                                        end
-                                    )
-                                end
-                                ac()
-                            end
-                        )
-                    end
-                    p.AddSignal(
-                        L.InputBegan,
-                        function(ad)
-                            if
-                                ad.UserInputType == Enum.UserInputType.MouseButton1 or
-                                    ad.UserInputType == Enum.UserInputType.Touch
-                             then
-                                while h:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                                    local ae = L.AbsolutePosition.X
-                                    local af = ae + L.AbsoluteSize.X
-                                    local ag, ah = math.clamp(n.X, ae, af), L.AbsolutePosition.Y
-                                    local ai = ah + L.AbsoluteSize.Y
-                                    local aj = math.clamp(n.Y, ah, ai)
-                                    E = (ag - ae) / (af - ae)
-                                    F = 1 - ((aj - ah) / (ai - ah))
-                                    ac()
-                                    l:Wait()
-                                end
-                            end
-                        end
-                    )
-                    p.AddSignal(
-                        U.InputBegan,
-                        function(ad)
-                            if
-                                ad.UserInputType == Enum.UserInputType.MouseButton1 or
-                                    ad.UserInputType == Enum.UserInputType.Touch
-                             then
-                                while h:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                                    local ae = U.AbsolutePosition.Y
-                                    local af = ae + U.AbsoluteSize.Y
-                                    local ag = math.clamp(n.Y, ae, af)
-                                    D = ((ag - ae) / (af - ae))
-                                    ac()
-                                    l:Wait()
-                                end
-                            end
-                        end
-                    )
-                    if x.Transparency then
-                        p.AddSignal(
-                            _.InputBegan,
-                            function(ad)
-                                if ad.UserInputType == Enum.UserInputType.MouseButton1 then
-                                    while h:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                                        local ae = _.AbsolutePosition.Y
-                                        local af = ae + _.AbsoluteSize.Y
-                                        local ag = math.clamp(n.Y, ae, af)
-                                        G = 1 - ((ag - ae) / (af - ae))
-                                        ac()
-                                        l:Wait()
-                                    end
-                                end
-                            end
-                        )
-                    end
-                    ac()
-                    C:Button(
-                        "Done",
-                        function()
-                            z:SetValue({D, E, F}, G)
-                        end
-                    )
-                    C:Button "Cancel"
-                    C:Open()
                 end
-            function z.Display(ac)
-                z.Value = Color3.fromHSV(z.Hue, z.Sat, z.Vib)
-                B.BackgroundColor3 = z.Value
-                B.BackgroundTransparency = z.Transparency
-                u.Library:SafeCallback(z.Callback, z.Value)
-                u.Library:SafeCallback(z.Changed, z.Value)
             end
-            function z.SetValue(ac, ad, ae)
-                local af = Color3.fromHSV(ad[1], ad[2], ad[3])
-                z.Transparency = ae or 0
-                z:SetHSVFromRGB(af)
-                z:Display()
-            end
-            function z.SetValueRGB(ac, ad, ae)
-                z.Transparency = ae or 0
-                z:SetHSVFromRGB(ad)
-                z:Display()
-            end
-            function z.OnChanged(ac, ad)
-                z.Changed = ad
-                ad(z.Value)
-            end
-            function z.Destroy(ac)
-                A:Destroy()
-                y.Options[w] = nil
-            end
-            p.AddSignal(
-                A.Frame.MouseButton1Click,
+            task.spawn(p)
+            k.AddSignal(o.Input:GetPropertyChangedSignal "Text", p)
+            k.AddSignal(o.Input:GetPropertyChangedSignal "CursorPosition", p)
+            k.AddSignal(
+                o.Input.Focused,
                 function()
-                    ab()
+                    p()
+                    o.Indicator.Size = UDim2.new(1, -2, 0, 2)
+                    o.Indicator.Position = UDim2.new(0, 1, 1, 0)
+                    o.Indicator.BackgroundTransparency = 0
+                    k.OverrideTag(o.Frame, {BackgroundColor3 = n and "InputFocused" or "DialogHolder"})
+                    k.OverrideTag(o.Indicator, {BackgroundColor3 = "Accent"})
                 end
             )
-            z:Display()
-            y.Options[w] = z
-            return z
+            k.AddSignal(
+                o.Input.FocusLost,
+                function()
+                    p()
+                    o.Indicator.Size = UDim2.new(1, -4, 0, 1)
+                    o.Indicator.Position = UDim2.new(0, 2, 1, 0)
+                    o.Indicator.BackgroundTransparency = 0.5
+                    k.OverrideTag(o.Frame, {BackgroundColor3 = n and "Input" or "DialogInput"})
+                    k.OverrideTag(o.Indicator, {BackgroundColor3 = n and "InputIndicator" or "DialogInputLine"})
+                end
+            )
+            return o
         end
-        return u
     end,
     [16] = function()
         local c, d, e, f, g = b(16)
-        local h, i, j, k =
-            game:GetService "UserInputService",
-            game:GetService "Players".LocalPlayer:GetMouse(),
-            game:GetService "Workspace".CurrentCamera,
-            d.Parent.Parent
-        local l, m, n, o, p = e(k.Packages.Flipper), e(k.Creator), e(k.Acrylic), e(d.Parent.Assets), d.Parent
-        local q, r, s = l.Spring.new, l.Instant.new, m.New
-        return function(t)
-            local u, v, w, x, y, z =
-                e(k),
-                {
-                    Minimized = false,
-                    Maximized = false,
-                    Size = t.Size,
-                    CurrentPos = 0,
-                    Position = UDim2.fromOffset(
-                        j.ViewportSize.X / 2 - t.Size.X.Offset / 2,
-                        j.ViewportSize.Y / 2 - t.Size.Y.Offset / 2
-                    )
-                },
-                false
-            local A, B = false
-            local C = false
-            v.AcrylicPaint = n.AcrylicPaint()
-            local D, E =
-                s(
-                    "Frame",
-                    {
-                        Size = UDim2.fromOffset(4, 0),
-                        BackgroundColor3 = Color3.fromRGB(76, 194, 255),
-                        Position = UDim2.fromOffset(0, 17),
-                        AnchorPoint = Vector2.new(0, 0.5),
-                        ThemeTag = {BackgroundColor3 = "Accent"}
-                    },
-                    {s("UICorner", {CornerRadius = UDim.new(0, 2)})}
-                ),
-                s(
-                    "Frame",
-                    {Size = UDim2.fromOffset(20, 20), BackgroundTransparency = 1, Position = UDim2.new(1, -20, 1, -20)}
-                )
-            v.TabHolder =
-                s(
-                "ScrollingFrame",
-                {
-                    Size = UDim2.fromScale(1, 1),
-                    BackgroundTransparency = 1,
-                    ScrollBarImageTransparency = 1,
-                    ScrollBarThickness = 0,
-                    BorderSizePixel = 0,
-                    CanvasSize = UDim2.fromScale(0, 0),
-                    ScrollingDirection = Enum.ScrollingDirection.Y
-                },
-                {s("UIListLayout", {Padding = UDim.new(0, 4)})}
-            )
-            local F =
-                s(
-                "Frame",
-                {
-                    Size = UDim2.new(0, t.TabWidth, 1, -66),
-                    Position = UDim2.new(0, 12, 0, 54),
-                    BackgroundTransparency = 1,
-                    ClipsDescendants = true
-                },
-                {v.TabHolder, D}
-            )
-            v.TabDisplay =
-                s(
-                "TextLabel",
-                {
-                    RichText = true,
-                    Text = "Tab",
-                    TextTransparency = 0,
-                    FontFace = Font.new("rbxassetid://12187365364", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal),
-                    TextSize = 28,
-                    TextXAlignment = "Left",
-                    TextYAlignment = "Center",
-                    Size = UDim2.new(1, -16, 0, 28),
-                    Position = UDim2.fromOffset(t.TabWidth + 26, 56),
-                    BackgroundTransparency = 1,
-                    ThemeTag = {TextColor3 = "Text"}
-                }
-            )
-            v.ContainerHolder =
-                s(
-                "CanvasGroup",
-                {
-                    Size = UDim2.new(1, -t.TabWidth - 32, 1, -102),
-                    Position = UDim2.fromOffset(t.TabWidth + 26, 90),
-                    BackgroundTransparency = 1
-                }
-            )
-            v.Root =
-                s(
-                "Frame",
-                {BackgroundTransparency = 1, Size = v.Size, Position = v.Position, Parent = t.Parent},
-                {v.AcrylicPaint.Frame, v.TabDisplay, v.ContainerHolder, F, E}
-            )
-            v.TitleBar = e(d.Parent.TitleBar) {Title = t.Title, SubTitle = t.SubTitle, Parent = v.Root, Window = v}
-            if e(k).UseAcrylic then
-                v.AcrylicPaint.AddParent(v.Root)
-            end
-            local G, H =
-                l.GroupMotor.new {X = v.Size.X.Offset, Y = v.Size.Y.Offset},
-                l.GroupMotor.new {X = v.Position.X.Offset, Y = v.Position.Y.Offset}
-            v.SelectorPosMotor = l.SingleMotor.new(17)
-            v.SelectorSizeMotor = l.SingleMotor.new(0)
-            v.ContainerBackMotor = l.SingleMotor.new(0)
-            v.ContainerPosMotor = l.SingleMotor.new(94)
-            G:onStep(
-                function(I)
-                    v.Root.Size = UDim2.new(0, I.X, 0, I.Y)
-                end
-            )
-            H:onStep(
-                function(I)
-                    v.Root.Position = UDim2.new(0, I.X, 0, I.Y)
-                end
-            )
-            local I, J = 0, 0
-            v.SelectorPosMotor:onStep(
-                function(K)
-                    D.Position = UDim2.new(0, 0, 0, K + 17)
-                    local L = tick()
-                    local M = L - J
-                    if I ~= nil then
-                        v.SelectorSizeMotor:setGoal(q((math.abs(K - I) / (M * 60)) + 16))
-                        I = K
-                    end
-                    J = L
-                end
-            )
-            v.SelectorSizeMotor:onStep(
-                function(K)
-                    D.Size = UDim2.new(0, 4, 0, K)
-                end
-            )
-            v.ContainerBackMotor:onStep(
-                function(K)
-                    v.ContainerHolder.GroupTransparency = K
-                end
-            )
-            v.ContainerPosMotor:onStep(
-                function(K)
-                    v.ContainerHolder.Position = UDim2.fromOffset(t.TabWidth + 26, K)
-                end
-            )
-            local K, L
-            v.Maximize = function(M, N, O)
-                v.Maximized = M
-                v.TitleBar.MaxButton.Frame.Icon.Image = M and o.Restore or o.Max
-                if M then
-                    K = v.Size.X.Offset
-                    L = v.Size.Y.Offset
-                end
-                local P, Q = M and j.ViewportSize.X or K, M and j.ViewportSize.Y or L
-                G:setGoal {
-                    X = l[O and "Instant" or "Spring"].new(P, {frequency = 6}),
-                    Y = l[O and "Instant" or "Spring"].new(Q, {frequency = 6})
-                }
-                v.Size = UDim2.fromOffset(P, Q)
-                if not N then
-                    H:setGoal {
-                        X = q(M and 0 or v.Position.X.Offset, {frequency = 6}),
-                        Y = q(M and 0 or v.Position.Y.Offset, {frequency = 6})
-                    }
-                end
-            end
-            m.AddSignal(
-                v.TitleBar.Frame.InputBegan,
-                function(M)
-                    if M.UserInputType == Enum.UserInputType.MouseButton1 or M.UserInputType == Enum.UserInputType.Touch then
-                        w = true
-                        y = M.Position
-                        z = v.Root.Position
-                        if v.Maximized then
-                            z =
-                                UDim2.fromOffset(
-                                i.X - (i.X * ((K - 100) / v.Root.AbsoluteSize.X)),
-                                i.Y - (i.Y * (L / v.Root.AbsoluteSize.Y))
+        local h, i = d.Parent.Parent, e(d.Parent.Assets)
+        local j, k = e(h.Creator), e(h.Packages.Flipper)
+        local l, m = j.New, j.AddSignal
+        return function(n)
+            local o, p, q =
+                {},
+                e(h),
+                function(o, p, q, r)
+                    local s = {Callback = r or function()
+                            end}
+                    s.Frame =
+                        l(
+                        "TextButton",
+                        {
+                            Size = UDim2.new(0, 34, 1, -8),
+                            AnchorPoint = Vector2.new(1, 0),
+                            BackgroundTransparency = 1,
+                            Parent = q,
+                            Position = p,
+                            Text = "",
+                            ThemeTag = {BackgroundColor3 = "Text"}
+                        },
+                        {
+                            l("UICorner", {CornerRadius = UDim.new(0, 7)}),
+                            l(
+                                "ImageLabel",
+                                {
+                                    Image = o,
+                                    Size = UDim.fromOffset(16, 16),
+                                    Position = UDim2.fromScale(0.5, 0.5),
+                                    AnchorPoint = Vector2.new(0.5, 0.5),
+                                    BackgroundTransparency = 1,
+                                    Name = "Icon",
+                                    ThemeTag = {ImageColor3 = "Text"}
+                                }
                             )
+                        }
+                    )
+                    local t, u = j.SpringMotor(1, s.Frame, "BackgroundTransparency")
+                    m(
+                        s.Frame.MouseEnter,
+                        function()
+                            u(0.94)
                         end
-                        M.Changed:Connect(
-                            function()
-                                if M.UserInputState == Enum.UserInputState.End then
-                                    w = false
-                                end
-                            end
-                        )
-                    end
-                end
-            )
-            m.AddSignal(
-                v.TitleBar.Frame.InputChanged,
-                function(M)
-                    if
-                        M.UserInputType == Enum.UserInputType.MouseMovement or
-                            M.UserInputType == Enum.UserInputType.Touch
-                     then
-                        x = M
-                    end
-                end
-            )
-            m.AddSignal(
-                E.InputBegan,
-                function(M)
-                    if M.UserInputType == Enum.UserInputType.MouseButton1 or M.UserInputType == Enum.UserInputType.Touch then
-                        A = true
-                        B = M.Position
-                    end
-                end
-            )
-            m.AddSignal(
-                h.InputChanged,
-                function(M)
-                    if M == x and w then
-                        local N = M.Position - y
-                        v.Position = UDim2.fromOffset(z.X.Offset + N.X, z.Y.Offset + N.Y)
-                        H:setGoal {X = r(v.Position.X.Offset), Y = r(v.Position.Y.Offset)}
-                        if v.Maximized then
-                            v.Maximize(false, true, true)
+                    )
+                    m(
+                        s.Frame.MouseLeave,
+                        function()
+                            u(1, true)
                         end
+                    )
+                    m(
+                        s.Frame.MouseButton1Down,
+                        function()
+                            u(0.96)
+                        end
+                    )
+                    m(
+                        s.Frame.MouseButton1Up,
+                        function()
+                            u(0.94)
+                        end
+                    )
+                    m(s.Frame.MouseButton1Click, s.Callback)
+                    s.SetCallback = function(v)
+                        s.Callback = v
                     end
-                    if
-                        (M.UserInputType == Enum.UserInputType.MouseMovement or
-                            M.UserInputType == Enum.UserInputType.Touch) and
-                            A
-                     then
-                        local N, O = M.Position - B, v.Size
-                        local P = Vector3.new(O.X.Offset, O.Y.Offset, 0) + Vector3.new(1, 1, 0) * N
-                        local Q = Vector2.new(math.clamp(P.X, 470, 2048), math.clamp(P.Y, 380, 2048))
-                        G:setGoal {X = l.Instant.new(Q.X), Y = l.Instant.new(Q.Y)}
-                    end
+                    return s
                 end
+            o.Frame =
+                l(
+                "Frame",
+                {Size = UDim2.new(1, 0, 0, 42), BackgroundTransparency = 1, Parent = n.Parent},
+                {
+                    l(
+                        "Frame",
+                        {Size = UDim2.new(1, -16, 1, 0), Position = UDim2.new(0, 16, 0, 0), BackgroundTransparency = 1},
+                        {
+                            l(
+                                "UIListLayout",
+                                {
+                                    Padding = UDim.new(0, 5),
+                                    FillDirection = Enum.FillDirection.Horizontal,
+                                    SortOrder = Enum.SortOrder.LayoutOrder
+                                }
+                            ),
+                            l(
+                                "TextLabel",
+                                {
+                                    RichText = true,
+                                    Text = n.Title,
+                                    FontFace = Font.new(
+                                        "rbxasset://fonts/families/GothamSSm.json",
+                                        Enum.FontWeight.Regular,
+                                        Enum.FontStyle.Normal
+                                    ),
+                                    TextSize = 12,
+                                    TextXAlignment = "Left",
+                                    TextYAlignment = "Center",
+                                    Size = UDim2.fromScale(0, 1),
+                                    AutomaticSize = Enum.AutomaticSize.X,
+                                    BackgroundTransparency = 1,
+                                    ThemeTag = {TextColor3 = "Text"}
+                                }
+                            ),
+                            l(
+                                "TextLabel",
+                                {
+                                    RichText = true,
+                                    Text = n.SubTitle,
+                                    TextTransparency = 0.4,
+                                    FontFace = Font.new(
+                                        "rbxasset://fonts/families/GothamSSm.json",
+                                        Enum.FontWeight.Regular,
+                                        Enum.FontStyle.Normal
+                                    ),
+                                    TextSize = 12,
+                                    TextXAlignment = "Left",
+                                    TextYAlignment = "Center",
+                                    Size = UDim2.fromScale(0, 1),
+                                    AutomaticSize = Enum.AutomaticSize.X,
+                                    BackgroundTransparency = 1,
+                                    ThemeTag = {TextColor3 = "Text"}
+                                }
+                            )
+                        }
+                    ),
+                    l(
+                        "Frame",
+                        {
+                            BackgroundTransparency = 0.5,
+                            Size = UDim2.new(1, 0, 0, 1),
+                            Position = UDim2.new(0, 0, 1, 0),
+                            ThemeTag = {BackgroundColor3 = "TitleBarLine"}
+                        }
+                    )
+                }
             )
-            m.AddSignal(
-                h.InputEnded,
-                function(M)
-                    if A == true or M.UserInputType == Enum.UserInputType.Touch then
-                        A = false
-                        v.Size = UDim2.fromOffset(G:getValue().X, G:getValue().Y)
-                    end
-                end
-            )
-            m.AddSignal(
-                v.TabHolder:GetPropertyChangedSignal "CanvasPosition",
+            o.CloseButton =
+                q(
+                i.Close,
+                UDim2.new(1, -4, 0, 4),
+                o.Frame,
                 function()
-                    I = N:GetCurrentTabPos() + 16
-                    J = 0
-                    v.SelectorPosMotor:setGoal(r(N:GetCurrentTabPos()))
-                end
-            )
-            m.AddSignal(
-                h.InputBegan,
-                function(M)
-                    if
-                        type(u.MinimizeKeybind) == "table" and u.MinimizeKeybind.Type == "Keybind" and
-                            not h:GetFocusedTextBox()
-                     then
-                        if M.KeyCode.Name == u.MinimizeKeybind.Value then
-                            v:Minimize()
-                        end
-                    elseif M.KeyCode == u.MinimizeKey and not h:GetFocusedTextBox() then
-                        v:Minimize()
-                    end
-                end
-            )
-            function v.Minimize(M)
-                v.Minimized = not v.Minimized
-                v.Root.Visible = not v.Minimized
-                if not C then
-                    C = true
-                    local N = u.MinimizeKeybind and u.MinimizeKeybind.Value or u.MinimizeKey.Name
-                    u:Notify {Title = "Interface", Content = "Press " .. N .. " to toggle the inteface.", Duration = 6}
-                end
-            end
-            function v.Destroy(M)
-                if e(k).UseAcrylic then
-                    v.AcrylicPaint.Model:Destroy()
-                end
-                v.Root:Destroy()
-            end
-            local M = e(p.Dialog):Init(v)
-            function v.Dialog(N, O)
-                local P = M:Create()
-                P.Title.Text = O.Title
-                local Q =
-                    s(
-                    "TextLabel",
-                    {
-                        FontFace = Font.new "rbxasset://fonts/families/GothamSSm.json",
-                        Text = O.Content,
-                        TextColor3 = Color3.fromRGB(240, 240, 240),
-                        TextSize = 14,
-                        TextXAlignment = Enum.TextXAlignment.Left,
-                        TextYAlignment = Enum.TextYAlignment.Top,
-                        Size = UDim2.new(1, -40, 1, 0),
-                        Position = UDim2.fromOffset(20, 60),
-                        BackgroundTransparency = 1,
-                        Parent = P.Root,
-                        ClipsDescendants = false,
-                        ThemeTag = {TextColor3 = "Text"}
+                    p.Window:Dialog {
+                        Title = "Close",
+                        Content = "Are you sure you want to unload the interface?",
+                        Buttons = {{Title = "Yes", Callback = function()
+                                    p:Destroy()
+                                end}, {Title = "No"}}
                     }
-                )
-                s(
-                    "UISizeConstraint",
-                    {MinSize = Vector2.new(300, 165), MaxSize = Vector2.new(620, math.huge), Parent = P.Root}
-                )
-                P.Root.Size = UDim2.fromOffset(Q.TextBounds.X + 40, 165)
-                if Q.TextBounds.X + 40 > v.Size.X.Offset - 120 then
-                    P.Root.Size = UDim2.fromOffset(v.Size.X.Offset - 120, 165)
-                    Q.TextWrapped = true
-                    P.Root.Size = UDim2.fromOffset(v.Size.X.Offset - 120, Q.TextBounds.Y + 150)
                 end
-                for R, S in next, O.Buttons do
-                    P:Button(S.Title, S.Callback)
+            )
+            o.MaxButton =
+                q(
+                i.Max,
+                UDim2.new(1, -40, 0, 4),
+                o.Frame,
+                function()
+                    n.Window.Maximize(not n.Window.Maximized)
                 end
-                P:Open()
-            end
-            local N = e(p.Tab):Init(v)
-            function v.AddTab(O, P)
-                return N:New(P.Title, P.Icon, v.TabHolder)
-            end
-            function v.SelectTab(O, P)
-                N:SelectTab(1)
-            end
-            return v
+            )
+            o.MinButton =
+                q(
+                i.Min,
+                UDim2.new(1, -80, 0, 4),
+                o.Frame,
+                function()
+                    p.Window:Minimize()
+                end
+            )
+            return o
         end
     end,
     [17] = function()
@@ -2380,11 +1860,9 @@ local aa = {
                 end
             )
             m.AddSignal(
-                v.TabHolder:GetPropertyChangedSignal "CanvasPosition",
+                v.TabHolder.UIListLayout:GetPropertyChangedSignal "AbsoluteContentSize",
                 function()
-                    I = N:GetCurrentTabPos() + 16
-                    J = 0
-                    v.SelectorPosMotor:setGoal(r(N:GetCurrentTabPos()))
+                    v.TabHolder.CanvasSize = UDim2.new(0, 0, 0, v.TabHolder.UIListLayout.AbsoluteContentSize.Y)
                 end
             )
             m.AddSignal(
@@ -2461,6 +1939,14 @@ local aa = {
             function v.SelectTab(O, P)
                 N:SelectTab(1)
             end
+            m.AddSignal(
+                v.TabHolder:GetPropertyChangedSignal "CanvasPosition",
+                function()
+                    I = N:GetCurrentTabPos() + 16
+                    J = 0
+                    v.SelectorPosMotor:setGoal(r(N:GetCurrentTabPos()))
+                end
+            )
             return v
         end
     end,
@@ -3582,6 +3068,7 @@ local aa = {
             k.Options[i] = l
             return l
         end
+        return g
     end,
     [23] = function()
         local aa, ab, ac, ad, ae = b(23)
@@ -3698,7 +3185,7 @@ local aa = {
                     TextColor3 = Color3.fromRGB(240, 240, 240),
                     TextSize = 13,
                     TextXAlignment = Enum.TextXAlignment.Center,
-                    Size = UDim.new(0, 0, 0, 14),
+                    Size = UDim2.new(0, 0, 0, 14),
                     Position = UDim2.new(0, 0, 0.5, 0),
                     AnchorPoint = Vector2.new(0, 0.5),
                     BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -3970,6 +3457,7 @@ local aa = {
                         ThemeTag = {TextColor3 = "SubText"}
                     }
                 )
+
             local o =
                 ai(
                 "Frame",
@@ -4001,23 +3489,6 @@ local aa = {
             ah.AddSignal(btnMinus.MouseButton1Click, function()
                 stepValue(-h.Rounding)
             end)
-
-            ah.AddSignal(
-                k.InputBegan,
-                function(p)
-                    if p.UserInputType == Enum.UserInputType.MouseButton1 or p.UserInputType == Enum.UserInputType.Touch then
-                        i = true
-                    end
-                end
-            )
-            ah.AddSignal(
-                k.InputEnded,
-                function(p)
-                    if p.UserInputType == Enum.UserInputType.MouseButton1 or p.UserInputType == Enum.UserInputType.Touch then
-                        i = false
-                    end
-                end
-            )
             ah.AddSignal(
                 af.InputChanged,
                 function(p)
@@ -5055,7 +4526,7 @@ local aa = {
     end,
     [33] = function()
         local aa, ab, ac, ad, ae = b(33)
-        local af, ag, ah = ac(ab.Parent.BaseMotor), ac(ab.Parent.SingleMotor), ac(ab.Parent.isMotor)
+        local af, ag, ah = ac(ab.Parent.GroupMotor), ac(ab.Parent.Instant), ac(ab.Parent.Spring)
         local ai = setmetatable({}, af)
         ai.__index = ai
         local aj = function(aj)
@@ -5321,20 +4792,6 @@ local aa = {
                 end
             )
         end
-                      "should complete",
-                        function()
-                            expect(ah._state.complete).to.equal(true)
-                        end
-                    )
-                    it(
-                        "should be exactly the goal value when completed",
-                        function()
-                            expect(ah._state.value).to.equal(0)
-                        end
-                    )
-                end
-            )
-        end
     end,
     [39] = function()
         local aa, ab, ac, ad, ae = b(39)
@@ -5378,7 +4835,150 @@ local aa = {
             return coroutine.yield()
         end
         return ag
-))
+    end,
+    [40] = function()
+        local aa, ab, ac, ad, ae = b(40)
+        return function()
+            local af = ac(ab.Parent.Signal)
+            it(
+                "should invoke all connections, instantly",
+                function()
+                    local ag, ah, aj = (af.new())
+                    ag:connect(
+                        function(c)
+                            ah = c
+                        end
+                    )
+                    ag:connect(
+                        function(c)
+                            aj = c
+                        end
+                    )
+                    ag:fire "hello"
+                    expect(ah).to.equal "hello"
+                    expect(aj).to.equal "hello"
+                end
+            )
+            it(
+                "should return values when :wait() is called",
+                function()
+                    local ag = af.new()
+                    spawn(
+                        function()
+                            ag:fire(123, "hello")
+                        end
+                    )
+                    local ah, aj = ag:wait()
+                    expect(ah).to.equal(123)
+                    expect(aj).to.equal "hello"
+                end
+            )
+            it(
+                "should properly handle disconnections",
+                function()
+                    local ag, ah = af.new(), false
+                    local aj =
+                        ag:connect(
+                        function()
+                            ah = true
+                        end
+                    )
+                    aj:disconnect()
+                    ag:fire()
+                    expect(ah).to.equal(false)
+                end
+            )
+        end
+    end,
+    [41] = function()
+        local aa, ab, ac, ad, ae = b(41)
+        local af = ac(ab.Parent.BaseMotor)
+        local ag = setmetatable({}, af)
+        ag.__index = ag
+        function ag.new(ah, aj)
+            assert(ah, "Missing argument #1: initialValue")
+            assert(typeof(ah) == "number", "initialValue must be a number!")
+            local c = setmetatable(af.new(), ag)
+            if aj ~= nil then
+                c._useImplicitConnections = aj
+            else
+                c._useImplicitConnections = true
+            end
+            c._goal = nil
+            c._state = {complete = true, value = ah}
+            return c
+        end
+        function ag.step(ah, aj)
+            if ah._state.complete then
+                return true
+            end
+            local c = ah._goal:step(ah._state, aj)
+            ah._state = c
+            ah._onStep:fire(c.value)
+            if c.complete then
+                if ah._useImplicitConnections then
+                    ah:stop()
+                end
+                ah._onComplete:fire()
+            end
+            return c.complete
+        end
+        function ag.getValue(ah)
+            return ah._state.value
+        end
+        function ag.setGoal(ah, aj)
+            ah._state.complete = false
+            ah._goal = aj
+            ah._onStart:fire()
+            if ah._useImplicitConnections then
+                ah:start()
+            end
+        end
+        function ag.__tostring(ah)
+            return "Motor(Single)"
+        end
+        return ag
+    end,
+    [42] = function()
+        local aa, ab, ac, ad, ae = b(42)
+        return function()
+            local af, ag = ac(ab.Parent.SingleMotor), ac(ab.Parent.Instant)
+            it(
+                "should assign new state on step",
+                function()
+                    local ah = af.new(0, false)
+                    ah:setGoal(ag.new(5))
+                    ah:step(1.6666666666666665E-2)
+                    expect(ah._state.complete).to.equal(true)
+                    expect(ah._state.value).to.equal(5)
+                end
+            )
+            it(
+                [[should invoke onComplete listeners when the goal is completed]],
+                function()
+                    local ah, aj = af.new(0, false), false
+                    ah:onComplete(
+                        function()
+                            aj = true
+                        end
+                    )
+                    ah:setGoal(ag.new(5))
+                    ah:step(1.6666666666666665E-2)
+                    expect(aj).to.equal(true)
+                end
+            )
+            it(
+                "should start when the goal is set",
+                function()
+                    local ah, aj = af.new(0, false), false
+                    ah:onStart(
+                        function()
+                            aj = not aj
+                        end
+                    )
+                    ah:setGoal(ag.new(5))
+                    expect(aj).to.equal(true)
+                    ah:setGoal(ag.new(5))
                     expect(aj).to.equal(false)
                 end
             )
@@ -5580,4 +5180,427 @@ local aa = {
             ElementTransparency = 0.84,
             ToggleSlider = Color3.fromRGB(110, 160, 160),
             ToggleToggled = Color3.fromRGB(0, 0, 0),
-            SliderRail = Color3.fromRGB(110,
+            SliderRail = Color3.fromRGB(110, 160, 160),
+            DropdownFrame = Color3.fromRGB(160, 200, 200),
+            DropdownHolder = Color3.fromRGB(40, 80, 80),
+            DropdownBorder = Color3.fromRGB(40, 65, 65),
+            DropdownOption = Color3.fromRGB(110, 160, 160),
+            Keybind = Color3.fromRGB(110, 160, 160),
+            Input = Color3.fromRGB(110, 160, 160),
+            InputFocused = Color3.fromRGB(20, 10, 30),
+            InputIndicator = Color3.fromRGB(130, 170, 170),
+            Dialog = Color3.fromRGB(40, 80, 80),
+            DialogHolder = Color3.fromRGB(30, 60, 60),
+            DialogHolderLine = Color3.fromRGB(25, 50, 50),
+            DialogButton = Color3.fromRGB(40, 80, 80),
+            DialogButtonBorder = Color3.fromRGB(80, 110, 110),
+            DialogBorder = Color3.fromRGB(50, 100, 100),
+            DialogInput = Color3.fromRGB(45, 90, 90),
+            DialogInputLine = Color3.fromRGB(130, 170, 170),
+            Text = Color3.fromRGB(240, 240, 240),
+            SubText = Color3.fromRGB(170, 170, 170),
+            Hover = Color3.fromRGB(110, 160, 160),
+            HoverChange = 0.04
+        }
+    end,
+    [50] = function()
+        local aa, ab, ac, ad, ae = b(50)
+        return {
+            Name = "Dark",
+            Accent = Color3.fromRGB(96, 205, 255),
+            AcrylicMain = Color3.fromRGB(60, 60, 60),
+            AcrylicBorder = Color3.fromRGB(90, 90, 90),
+            AcrylicGradient = ColorSequence.new(Color3.fromRGB(40, 40, 40), Color3.fromRGB(40, 40, 40)),
+            AcrylicNoise = 0.9,
+            TitleBarLine = Color3.fromRGB(75, 75, 75),
+            Tab = Color3.fromRGB(120, 120, 120),
+            Element = Color3.fromRGB(120, 120, 120),
+            ElementBorder = Color3.fromRGB(35, 35, 35),
+            InElementBorder = Color3.fromRGB(90, 90, 90),
+            ElementTransparency = 0.87,
+            ToggleSlider = Color3.fromRGB(120, 120, 120),
+            ToggleToggled = Color3.fromRGB(0, 0, 0),
+            SliderRail = Color3.fromRGB(120, 120, 120),
+            DropdownFrame = Color3.fromRGB(160, 160, 160),
+            DropdownHolder = Color3.fromRGB(45, 45, 45),
+            DropdownBorder = Color3.fromRGB(35, 35, 35),
+            DropdownOption = Color3.fromRGB(120, 120, 120),
+            Keybind = Color3.fromRGB(120, 120, 120),
+            Input = Color3.fromRGB(160, 160, 160),
+            InputFocused = Color3.fromRGB(10, 10, 10),
+            InputIndicator = Color3.fromRGB(150, 150, 150),
+            Dialog = Color3.fromRGB(45, 45, 45),
+            DialogHolder = Color3.fromRGB(35, 35, 35),
+            DialogHolderLine = Color3.fromRGB(30, 30, 30),
+            DialogButton = Color3.fromRGB(45, 45, 45),
+            DialogButtonBorder = Color3.fromRGB(80, 80, 80),
+            DialogBorder = Color3.fromRGB(70, 70, 70),
+            DialogInput = Color3.fromRGB(55, 55, 55),
+            DialogInputLine = Color3.fromRGB(160, 160, 160),
+            Text = Color3.fromRGB(240, 240, 240),
+            SubText = Color3.fromRGB(170, 170, 170),
+            Hover = Color3.fromRGB(120, 120, 120),
+            HoverChange = 0.07
+        }
+    end,
+    [51] = function()
+        local aa, ab, ac, ad, ae = b(51)
+        return {
+            Name = "Darker",
+            Accent = Color3.fromRGB(72, 138, 182),
+            AcrylicMain = Color3.fromRGB(30, 30, 30),
+            AcrylicBorder = Color3.fromRGB(60, 60, 60),
+            AcrylicGradient = ColorSequence.new(Color3.fromRGB(25, 25, 25), Color3.fromRGB(15, 15, 15)),
+            AcrylicNoise = 0.94,
+            TitleBarLine = Color3.fromRGB(65, 65, 65),
+            Tab = Color3.fromRGB(100, 100, 100),
+            Element = Color3.fromRGB(70, 70, 70),
+            ElementBorder = Color3.fromRGB(25, 25, 25),
+            InElementBorder = Color3.fromRGB(55, 55, 55),
+            ElementTransparency = 0.82,
+            DropdownFrame = Color3.fromRGB(120, 120, 120),
+            DropdownHolder = Color3.fromRGB(35, 35, 35),
+            DropdownBorder = Color3.fromRGB(25, 25, 25),
+            Dialog = Color3.fromRGB(35, 35, 35),
+            DialogHolder = Color3.fromRGB(25, 25, 25),
+            DialogHolderLine = Color3.fromRGB(20, 20, 20),
+            DialogButton = Color3.fromRGB(35, 35, 35),
+            DialogButtonBorder = Color3.fromRGB(55, 55, 55),
+            DialogBorder = Color3.fromRGB(50, 50, 50),
+            DialogInput = Color3.fromRGB(45, 45, 45),
+            DialogInputLine = Color3.fromRGB(120, 120, 120)
+        }
+    end,
+    [52] = function()
+        local aa, ab, ac, ad, ae = b(52)
+        return {
+            Name = "Light",
+            Accent = Color3.fromRGB(0, 103, 192),
+            AcrylicMain = Color3.fromRGB(200, 200, 200),
+            AcrylicBorder = Color3.fromRGB(120, 120, 120),
+            AcrylicGradient = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(255, 255, 255)),
+            AcrylicNoise = 0.96,
+            TitleBarLine = Color3.fromRGB(160, 160, 160),
+            Tab = Color3.fromRGB(90, 90, 90),
+            Element = Color3.fromRGB(255, 255, 255),
+            ElementBorder = Color3.fromRGB(180, 180, 180),
+            InElementBorder = Color3.fromRGB(150, 150, 150),
+            ElementTransparency = 0.65,
+            ToggleSlider = Color3.fromRGB(40, 40, 40),
+            ToggleToggled = Color3.fromRGB(255, 255, 255),
+            SliderRail = Color3.fromRGB(40, 40, 40),
+            DropdownFrame = Color3.fromRGB(200, 200, 200),
+            DropdownHolder = Color3.fromRGB(240, 240, 240),
+            DropdownBorder = Color3.fromRGB(200, 200, 200),
+            DropdownOption = Color3.fromRGB(150, 150, 150),
+            Keybind = Color3.fromRGB(120, 120, 120),
+            Input = Color3.fromRGB(200, 200, 200),
+            InputFocused = Color3.fromRGB(100, 100, 100),
+            InputIndicator = Color3.fromRGB(80, 80, 80),
+            Dialog = Color3.fromRGB(255, 255, 255),
+            DialogHolder = Color3.fromRGB(240, 240, 240),
+            DialogHolderLine = Color3.fromRGB(228, 228, 228),
+            DialogButton = Color3.fromRGB(255, 255, 255),
+            DialogButtonBorder = Color3.fromRGB(190, 190, 190),
+            DialogBorder = Color3.fromRGB(140, 140, 140),
+            DialogInput = Color3.fromRGB(250, 250, 250),
+            DialogInputLine = Color3.fromRGB(160, 160, 160),
+            Text = Color3.fromRGB(0, 0, 0),
+            SubText = Color3.fromRGB(40, 40, 40),
+            Hover = Color3.fromRGB(50, 50, 50),
+            HoverChange = 0.16
+        }
+    end,
+    [53] = function()
+        local aa, ab, ac, ad, ae = b(53)
+        return {
+            Name = "Rose",
+            Accent = Color3.fromRGB(180, 55, 90),
+            AcrylicMain = Color3.fromRGB(40, 40, 40),
+            AcrylicBorder = Color3.fromRGB(130, 90, 110),
+            AcrylicGradient = ColorSequence.new(Color3.fromRGB(190, 60, 135), Color3.fromRGB(165, 50, 70)),
+            AcrylicNoise = 0.92,
+            TitleBarLine = Color3.fromRGB(140, 85, 105),
+            Tab = Color3.fromRGB(180, 140, 160),
+            Element = Color3.fromRGB(200, 120, 170),
+            ElementBorder = Color3.fromRGB(110, 70, 85),
+            InElementBorder = Color3.fromRGB(120, 90, 90),
+            ElementTransparency = 0.86,
+            ToggleSlider = Color3.fromRGB(200, 120, 170),
+            ToggleToggled = Color3.fromRGB(0, 0, 0),
+            SliderRail = Color3.fromRGB(200, 120, 170),
+            DropdownFrame = Color3.fromRGB(200, 160, 180),
+            DropdownHolder = Color3.fromRGB(120, 50, 75),
+            DropdownBorder = Color3.fromRGB(90, 40, 55),
+            DropdownOption = Color3.fromRGB(200, 120, 170),
+            Keybind = Color3.fromRGB(200, 120, 170),
+            Input = Color3.fromRGB(200, 120, 170),
+            InputFocused = Color3.fromRGB(20, 10, 30),
+            InputIndicator = Color3.fromRGB(170, 150, 190),
+            Dialog = Color3.fromRGB(120, 50, 75),
+            DialogHolder = Color3.fromRGB(95, 40, 60),
+            DialogHolderLine = Color3.fromRGB(90, 35, 55),
+            DialogButton = Color3.fromRGB(120, 50, 75),
+            DialogButtonBorder = Color3.fromRGB(155, 90, 115),
+            DialogBorder = Color3.fromRGB(100, 70, 90),
+            DialogInput = Color3.fromRGB(135, 55, 80),
+            DialogInputLine = Color3.fromRGB(190, 160, 180),
+            Text = Color3.fromRGB(240, 240, 240),
+            SubText = Color3.fromRGB(170, 170, 170),
+            Hover = Color3.fromRGB(200, 120, 170),
+            HoverChange = 0.04
+        }
+    end
+}
+do
+    local ab, ac, ad, ae, af, ag, ah, aj, c, e, f, g, h, i, j, k =
+        task,
+        setmetatable,
+        error,
+        newproxy,
+        getmetatable,
+        next,
+        table,
+        unpack,
+        coroutine,
+        script,
+        type,
+        require,
+        pcall,
+        getfenv,
+        setfenv,
+        rawget
+    local l, m, n, o, p, s, t, u, v, w, x = ah.insert, ah.remove, ah.freeze or function(l)
+                return l
+            end, ab and ab.defer or function(l, ...)
+                local m = c.create(l)
+                c.resume(m, ...)
+                return m
+            end, "0.0.0-venv", {}, {}, {}, {}, {}, {}
+    local y, z = {GetChildren = function(y)
+                local z, A = x[y], {}
+                for B in ag, z do
+                    l(A, B)
+                end
+                return A
+            end, FindFirstChild = function(y, z)
+                if not z then
+                    ad("Argument 1 missing or nil", 2)
+                end
+                for A in ag, x[y] do
+                    if A.Name == z then
+                        return A
+                    end
+                end
+                return
+            end, GetFullName = function(y)
+                local z, A = y.Name, y.Parent
+                while A do
+                    z = A.Name .. "." .. z
+                    A = A.Parent
+                end
+                return "VirtualEnv." .. z
+            end}, {}
+    for A, B in ag, y do
+        z[A] = function(C, ...)
+            if not x[C] then
+                ad("Expected ':' not '.' calling member function " .. A, 1)
+            end
+            return B(C, ...)
+        end
+    end
+    local C = function(C, D, E)
+        local F, G, H, I, J = ac({}, {__mode = "k"}), function(F)
+                ad(F .. " is not a valid (virtual) member of " .. C .. ' "' .. D .. '"', 1)
+            end, function(F)
+                ad("Unable to assign (virtual) property " .. F .. ". Property is read only", 1)
+            end, (ae(true))
+        local K = af(I)
+        K.__index = function(L, M)
+            if M == "ClassName" then
+                return C
+            elseif M == "Name" then
+                return D
+            elseif M == "Parent" then
+                return E
+            elseif C == "StringValue" and M == "Value" then
+                return J
+            else
+                local N = z[M]
+                if N then
+                    return N
+                end
+            end
+            for N in ag, F do
+                if N.Name == M then
+                    return N
+                end
+            end
+            G(M)
+        end
+        K.__newindex = function(L, M, N)
+            if M == "ClassName" then
+                H(M)
+            elseif M == "Name" then
+                D = N
+            elseif M == "Parent" then
+                if N == I then
+                    return
+                end
+                if E ~= nil then
+                    x[E][I] = nil
+                end
+                E = N
+                if N ~= nil then
+                    x[N][I] = true
+                end
+            elseif C == "StringValue" and M == "Value" then
+                J = N
+            else
+                G(M)
+            end
+        end
+        K.__tostring = function()
+            return D
+        end
+        x[I] = F
+        if E ~= nil then
+            x[E][I] = true
+        end
+        return I
+    end
+    local function D(E, F)
+        local G, H, I, J = E[1], E[2], E[3], E[4]
+        local K = m(I, 1)
+        local L = C(H, K, F)
+        s[G] = L
+        if I then
+            for M, N in ag, I do
+                L[M] = N
+            end
+        end
+        if J then
+            for M, N in ag, J do
+                D(N, L)
+            end
+        end
+        return L
+    end
+    local E = {}
+    for F, G in ag, a do
+        l(E, D(G))
+    end
+    for H, I in ag, aa do
+        local J = s[H]
+        t[J] = I
+        local K = J.ClassName
+        if K == "LocalScript" or K == "Script" then
+            l(v, J)
+        end
+    end
+    local J = function(J)
+        local K, L = J.ClassName, u[J]
+        if L and K == "ModuleScript" then
+            return aj(L)
+        end
+        local M = t[J]
+        if not M then
+            return
+        end
+        if K == "LocalScript" or K == "Script" then
+            M()
+            return
+        else
+            local N = {M()}
+            u[J] = N
+            return aj(N)
+        end
+    end
+    function b(K)
+        local L = s[K]
+        local M = t[L]
+        if not M then
+            return
+        end
+        local N, O, P, Q, R, S, T = false, n {Version = p, Script = e, Shared = w, GetScript = function()
+                    return e
+                end, GetShared = function()
+                    return w
+                end}, L, function(N, ...)
+                if x[N] and N.ClassName == "ModuleScript" and t[N] then
+                    return J(N)
+                end
+                return g(N, ...)
+            end
+        local U, V = function(U, ...)
+                if not N then
+                    T()
+                end
+                if f(U) == "number" and U >= 0 then
+                    if U == 0 then
+                        return S
+                    else
+                        U = U + 1
+                        local V, W = h(i, U)
+                        if V and W == R then
+                            return S
+                        end
+                    end
+                end
+                return i(U, ...)
+            end, function(U, V, ...)
+                if not N then
+                    T()
+                end
+                if f(U) == "number" and U >= 0 then
+                    if U == 0 then
+                        return j(S, V)
+                    else
+                        U = U + 1
+                        local W, X = h(i, U)
+                        if W and X == R then
+                            return j(S, V)
+                        end
+                    end
+                end
+                return j(U, V, ...)
+            end
+        function T()
+            R = i(0)
+            local W = {maui = O, script = P, require = Q, getfenv = U, setfenv = V}
+            S =
+                ac(
+                {},
+                {__index = function(X, Y)
+                        local Z = k(S, Y)
+                        if Z ~= nil then
+                            return Z
+                        end
+                        local _ = W[Y]
+                        if _ ~= nil then
+                            return _
+                        end
+                        return R[Y]
+                    end}
+            )
+            j(M, S)
+            N = true
+        end
+        return O, P, Q, U, V
+    end
+    for K, L in ag, v do
+        o(J, L)
+    end
+    do
+        local M
+        for N, O in ag, E do
+            if O.ClassName == "ModuleScript" and O.Name == "MainModule" then
+                M = O
+                break
+            end
+        end
+        if M then
+            return J(M)
+        end
+    end
+end
