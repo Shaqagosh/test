@@ -3422,23 +3422,24 @@ local aa = {
                     }
                 )
             -- Botões + e -
-            local btnSize = 24
-            local btnPadding = 4
+            -- Botões + e -
+            local btnSize = 18 -- Tamanho reduzido
+            local btnPadding = 2 -- Espaçamento entre botões
             local minusBtn = ai(
                 "TextButton",
                 {
                     Size = UDim2.fromOffset(btnSize, btnSize),
-                    Position = UDim2.new(0, 0, 10, 0),
-                    AnchorPoint = Vector2.new(0, 0.5),
-                    BackgroundTransparency = 0.5, -- Reduzido para maior visibilidade
-                    BackgroundColor3 = Color3.fromRGB(120, 120, 120), -- Fallback
+                    Position = UDim2.new(1, -(btnSize * 2 + btnPadding + 100), 0.5, 0), -- Lado a lado com plusBtn
+                    AnchorPoint = Vector2.new(1, 0.5),
+                    BackgroundTransparency = 0.5,
+                    BackgroundColor3 = Color3.fromRGB(120, 120, 120),
                     Text = "-",
-                    TextTransparency = 0, -- Garantir texto visível
+                    TextTransparency = 0,
                     FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json"),
-                    TextSize = 14,
-                    TextColor3 = Color3.fromRGB(200, 200, 200), -- Fallback
+                    TextSize = 12, -- Tamanho do texto reduzido
+                    TextColor3 = Color3.fromRGB(200, 200, 200),
                     ThemeTag = {BackgroundColor3 = "SliderRail", TextColor3 = "Text"},
-                    Parent = j.Frame -- Definir Parent explicitamente
+                    Parent = j.Frame
                 },
                 {
                     ai("UICorner", {CornerRadius = UDim.new(0, 4)}),
@@ -3449,17 +3450,17 @@ local aa = {
                 "TextButton",
                 {
                     Size = UDim2.fromOffset(btnSize, btnSize),
-                    Position = UDim2.new(1, -(btnSize + btnPadding), 0.5, 0),
+                    Position = UDim2.new(1, -100, 0.5, 0), -- À direita do minusBtn
                     AnchorPoint = Vector2.new(1, 0.5),
-                    BackgroundTransparency = 0.5, -- Reduzido para maior visibilidade
-                    BackgroundColor3 = Color3.fromRGB(120, 120, 120), -- Fallback
+                    BackgroundTransparency = 0.5,
+                    BackgroundColor3 = Color3.fromRGB(120, 120, 120),
                     Text = "+",
-                    TextTransparency = 0, -- Garantir texto visível
+                    TextTransparency = 0,
                     FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json"),
-                    TextSize = 14,
-                    TextColor3 = Color3.fromRGB(200, 200, 200), -- Fallback
+                    TextSize = 12, -- Tamanho do texto reduzido
+                    TextColor3 = Color3.fromRGB(200, 200, 200),
                     ThemeTag = {BackgroundColor3 = "SliderRail", TextColor3 = "Text"},
-                    Parent = j.Frame -- Definir Parent explicitamente
+                    Parent = j.Frame
                 },
                 {
                     ai("UICorner", {CornerRadius = UDim.new(0, 4)}),
@@ -3470,9 +3471,9 @@ local aa = {
                 ai(
                 "Frame",
                 {
-                    Size = UDim2.new(1, -(btnSize * 2 + btnPadding * 2 + 100), 0, 4), -- Ajustado para TextLabel
+                    Size = UDim2.new(1, -(btnSize * 2 + btnPadding + 100), 0, 4), -- Ajustado para botões lado a lado
                     AnchorPoint = Vector2.new(1, 0.5),
-                    Position = UDim2.new(1, -(btnSize + btnPadding + 104), 0.5, 0), -- Ajustado para TextLabel
+                    Position = UDim2.new(1, -(btnSize * 2 + btnPadding + 104), 0.5, 0),
                     BackgroundTransparency = 0.4,
                     Parent = j.Frame,
                     ThemeTag = {BackgroundColor3 = "SliderRail"}
