@@ -3449,7 +3449,7 @@ local aa = {
                 "TextButton",
                 {
                     Size = UDim2.fromOffset(btnSize, btnSize),
-                    Position = UDim2.new(1, -(btnSize + btnPadding), 0, 0.2),
+                    Position = UDim2.new(1, -(btnSize + btnPadding), 0.5, 0),
                     AnchorPoint = Vector2.new(1, 0.5),
                     BackgroundTransparency = 0.5, -- Reduzido para maior visibilidade
                     BackgroundColor3 = Color3.fromRGB(120, 120, 120), -- Fallback
