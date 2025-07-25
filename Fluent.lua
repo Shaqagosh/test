@@ -3362,181 +3362,276 @@ local aa = {
     end,
     [26] = function()
         local aa, ab, ac, ad, ae = b(26)
-        local af, ag = game:GetService "UserInputService", ab.Parent.Parent
-        local ah = ac(ag.Creator)
-        local ai, aj, c = ah.New, ag.Components, {}
-        c.__index = c
-        c.__type = "Slider"
-        function c.New(d, e, f)
-            local g = d.Library
-            assert(f.Title, "Slider - Missing Title.")
-            assert(f.Default, "Slider - Missing default value.")
-            assert(f.Min, "Slider - Missing minimum value.")
-            assert(f.Max, "Slider - Missing maximum value.")
-            assert(f.Rounding, "Slider - Missing rounding value.")
-            local h, i, j =
-                {Value = nil, Min = f.Min, Max = f.Max, Rounding = f.Rounding, Callback = f.Callback or function(h)
-                        end, Type = "Slider"},
-                false,
-                ac(aj.Element)(f.Title, f.Description, d.Container, false)
-            j.DescLabel.Size = UDim2.new(1, -170, 0, 14)
-            h.SetTitle = j.SetTitle
-            h.SetDesc = j.SetDesc
-            local k =
-                ai(
-                "ImageLabel",
-                {
-                    AnchorPoint = Vector2.new(0, 0.5),
-                    Position = UDim2.new(0, -7, 0.5, 0),
-                    Size = UDim2.fromOffset(14, 14),
-                    Image = "http://www.roblox.com/asset/?id=12266946128",
-                    ThemeTag = {ImageColor3 = "Accent"}
-                }
-            )
-            local l, m, n =
-                ai(
-                    "Frame",
-                    {BackgroundTransparency = 1, Position = UDim2.fromOffset(7, 0), Size = UDim2.new(1, -14, 1, 0)},
-                    {k}
-                ),
-                ai(
-                    "Frame",
-                    {Size = UDim2.new(0, 0, 1, 0), ThemeTag = {BackgroundColor3 = "Accent"}},
-                    {ai("UICorner", {CornerRadius = UDim.new(1, 0)})}
-                ),
-                ai(
-                    "TextLabel",
-                    {
-                        FontFace = Font.new "rbxasset://fonts/families/GothamSSm.json",
-                        Text = "Value",
-                        TextSize = 12,
-                        TextWrapped = true,
-                        TextXAlignment = Enum.TextXAlignment.Right,
-                        BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-                        BackgroundTransparency = 1,
-                        Size = UDim2.new(0, 100, 0, 14),
-                        Position = UDim2.new(0, -4, 0.5, 0),
-                        AnchorPoint = Vector2.new(1, 0.5),
-                        ThemeTag = {TextColor3 = "SubText"}
-                    }
-                )
-            local o =
-                ai(
-                "Frame",
-                {
-                    Size = UDim2.new(1, 0, 0, 4),
-                    AnchorPoint = Vector2.new(1, 0.5),
-                    Position = UDim2.new(1, -10, 0.5, 0),
-                    BackgroundTransparency = 0.4,
-                    Parent = j.Frame,
-                    ThemeTag = {BackgroundColor3 = "SliderRail"}
-                },
-                {
-                    ai("UICorner", {CornerRadius = UDim.new(1, 0)}),
-                    ai("UISizeConstraint", {MaxSize = Vector2.new(150, math.huge)}),
-                    n,
-                    m,
-                    l
-                }
-            )
-            -- Botões + e -
-            local btnSize = 24
-            local btnPadding = 4
-            local minusBtn = ai(
-                "TextButton",
-                {
-                    Size = UDim2.fromOffset(btnSize, btnSize),
-                    Position = UDim2.new(0, 0, 0.5, -btnSize/2),
-                    AnchorPoint = Vector2.new(0, 0.5),
-                    BackgroundTransparency = 0.9,
-                    Text = "-",
-                    Font = Enum.Font.GothamBold,
-                    TextSize = 18,
-                    TextColor3 = Color3.fromRGB(240,240,240),
-                    ThemeTag = {BackgroundColor3 = "DialogButton"},
-                    Parent = j.Frame
-                },
-                {
-                    ai("UICorner", {CornerRadius = UDim.new(0, 5)}),
-                    ai("UIStroke", {Transparency = 0.5, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, ThemeTag = {Color = "DialogButtonBorder"}})
-                }
-            )
-            local plusBtn = ai(
-                "TextButton",
-                {
-                    Size = UDim2.fromOffset(btnSize, btnSize),
-                    Position = UDim2.new(1, -(btnSize+btnPadding), 0.5, -btnSize/2),
-                    AnchorPoint = Vector2.new(1, 0.5),
-                    BackgroundTransparency = 0.9,
-                    Text = "+",
-                    Font = Enum.Font.GothamBold,
-                    TextSize = 18,
-                    TextColor3 = Color3.fromRGB(240,240,240),
-                    ThemeTag = {BackgroundColor3 = "DialogButton"},
-                    Parent = j.Frame
-                },
-                {
-                    ai("UICorner", {CornerRadius = UDim.new(0, 5)}),
-                    ai("UIStroke", {Transparency = 0.5, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, ThemeTag = {Color = "DialogButtonBorder"}})
-                }
-            )
-            ah.AddSignal(minusBtn.MouseButton1Click, function()
-                h:SetValue((h.Value or f.Default) - (f.Rounding or 1))
+        local af, ag = ac(ab.Parent.Parent.Packages.Flipper), ac(ab.Parent.Parent.Creator)
+        local ah, ai, aj = af.Spring.new, af.Instant.new, ag.New
+        return function(ak, al, am)
+            am = am or {}
+            local an = {}
+            an.Title = aj("TextLabel", {
+                FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
+                Text = al,
+                TextColor3 = Color3.fromRGB(200, 200, 200),
+                TextSize = 14,
+                TextXAlignment = Enum.TextXAlignment.Left,
+                Size = UDim2.new(1, 0, 0, 14),
+                BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+                BackgroundTransparency = 1,
+                ThemeTag = {TextColor3 = "Text"}
+            })
+            an.Desc = aj("TextLabel", {
+                FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json"),
+                Text = am.Description,
+                TextColor3 = Color3.fromRGB(150, 150, 150),
+                TextSize = 12,
+                TextWrapped = true,
+                TextXAlignment = Enum.TextXAlignment.Left,
+                BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+                AutomaticSize = Enum.AutomaticSize.Y,
+                Size = UDim2.new(1, 0, 0, 14),
+                BackgroundTransparency = 1,
+                ThemeTag = {TextColor3 = "SubText"}
+            })
+            an.LabelHolder = aj("Frame", {
+                AutomaticSize = Enum.AutomaticSize.Y,
+                BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+                BackgroundTransparency = 1,
+                Position = UDim2.fromOffset(10, 0),
+                Size = UDim2.new(1, -28, 0, 0)
+            }, {
+                aj("UIListLayout", {
+                    SortOrder = Enum.SortOrder.LayoutOrder,
+                    VerticalAlignment = Enum.VerticalAlignment.Center,
+                    Padding = UDim.new(0, 2)
+                }),
+                an.Title,
+                an.Desc
+            })
+            an.MinusButton = aj("TextButton", {
+                Size = UDim2.new(0, 24, 0, 24),
+                Position = UDim2.new(0, 0, 0.5, 0),
+                AnchorPoint = Vector2.new(0, 0.5),
+                BackgroundTransparency = 0.9,
+                BackgroundColor3 = Color3.fromRGB(120, 120, 120),
+                Text = "-",
+                FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json"),
+                TextColor3 = Color3.fromRGB(200, 200, 200),
+                TextSize = 14,
+                ThemeTag = {BackgroundColor3 = "SliderRail", TextColor3 = "Text"}
+            }, {
+                aj("UICorner", {CornerRadius = UDim.new(0, 4)}),
+                aj("UIStroke", {
+                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+                    Transparency = 0.65,
+                    ThemeTag = {Color = "InElementBorder"}
+                })
+            })
+            an.PlusButton = aj("TextButton", {
+                Size = UDim2.new(0, 24, 0, 24),
+                Position = UDim2.new(1, -24, 0.5, 0),
+                AnchorPoint = Vector2.new(0, 0.5),
+                BackgroundTransparency = 0.9,
+                BackgroundColor3 = Color3.fromRGB(120, 120, 120),
+                Text = "+",
+                FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json"),
+                TextColor3 = Color3.fromRGB(200, 200, 200),
+                TextSize = 14,
+                ThemeTag = {BackgroundColor3 = "SliderRail", TextColor3 = "Text"}
+            }, {
+                aj("UICorner", {CornerRadius = UDim.new(0, 4)}),
+                aj("UIStroke", {
+                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+                    Transparency = 0.65,
+                    ThemeTag = {Color = "InElementBorder"}
+                })
+            })
+            an.SliderBack = aj("Frame", {
+                Size = UDim2.new(1, -56, 0, 5),
+                Position = UDim2.new(0, 28, 0.5, 0),
+                AnchorPoint = Vector2.new(0, 0.5),
+                BackgroundTransparency = 0.75,
+                ThemeTag = {BackgroundColor3 = "SliderRail"}
+            }, {
+                aj("UICorner", {CornerRadius = UDim.new(0, 2)})
+            })
+            an.Indicator = aj("Frame", {
+                Size = UDim2.new(0, 0, 0, 5),
+                BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+                ThemeTag = {BackgroundColor3 = "Accent"}
+            }, {
+                aj("UICorner", {CornerRadius = UDim.new(0, 2)})
+            })
+            an.SliderFill = aj("Frame", {
+                Size = UDim2.new(0, 0, 0, 5),
+                BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+                ThemeTag = {BackgroundColor3 = "Accent"}
+            }, {
+                aj("UICorner", {CornerRadius = UDim.new(0, 2)})
+            })
+            an.Hitbox = aj("Frame", {
+                Size = UDim2.new(1, 0, 0, 30),
+                BackgroundTransparency = 1
+            })
+            an.Frame = aj("Frame", {
+                Size = UDim2.new(1, 0, 0, 0),
+                AutomaticSize = Enum.AutomaticSize.Y,
+                BackgroundTransparency = 1,
+                Parent = ak,
+                LayoutOrder = 7
+            }, {
+                aj("UIListLayout", {
+                    SortOrder = Enum.SortOrder.LayoutOrder,
+                    VerticalAlignment = Enum.VerticalAlignment.Center,
+                    Padding = UDim.new(0, 10)
+                }),
+                an.LabelHolder,
+                aj("Frame", {
+                    BackgroundTransparency = 1,
+                    Size = UDim2.new(1, 0, 0, 30)
+                }, {
+                    an.MinusButton,
+                    an.PlusButton,
+                    an.SliderBack,
+                    an.SliderFill,
+                    an.Indicator,
+                    an.Hitbox
+                })
+            })
+            local ao = game:GetService("UserInputService")
+            local ap = am.Default or am.Min or 0
+            local aq = am.Min or 0
+            local ar = am.Max or 100
+            local as = am.Rounding or 0
+            local at = (ar - aq) / 100
+            local au, av = ag.SpringMotor(math.clamp((ap - aq) / (ar - aq), 0, 1), an.Indicator, "Size", false, true)
+            an.Value = ap
+            local aw, ax
+            local ay = function(ay)
+                local az = math.clamp((ay - an.SliderBack.AbsolutePosition.X) / an.SliderBack.AbsoluteSize.X, 0, 1)
+                local aA = aq + (ar - aq) * az
+                if as > 0 then
+                    aA = math.floor(aA / as + 0.5) * as
+                end
+                an.Value = aA
+                av(UDim2.new(az, 0, 0, 5))
+                an.SliderFill.Size = UDim2.new(az, 0, 0, 5)
+                if am.Callback then
+                    local aB, aC = pcall(am.Callback, aA)
+                    if not aB then
+                        e(ab.Parent.Parent):Notify({
+                            Title = "Interface",
+                            Content = "Callback error",
+                            SubContent = aC,
+                            Duration = 5
+                        })
+                    end
+                end
+            end
+            local az = function()
+                if aw then
+                    aw:Disconnect()
+                    aw = nil
+                end
+                if ax then
+                    ax:Disconnect()
+                    ax = nil
+                end
+            end
+            ag.AddSignal(an.Hitbox.InputBegan, function(aA, aB)
+                if aB.UserInputType == Enum.UserInputType.MouseButton1 or aB.UserInputType == Enum.UserInputType.Touch then
+                    az()
+                    aw = ao.InputChanged:Connect(function(aC)
+                        if aC.UserInputType == Enum.UserInputType.MouseMovement or aC.UserInputType == Enum.UserInputType.Touch then
+                            ay(aC.Position.X)
+                        end
+                    end)
+                    ax = ao.InputEnded:Connect(function(aC)
+                        if aC.UserInputType == Enum.UserInputType.MouseButton1 or aC.UserInputType == Enum.UserInputType.Touch then
+                            az()
+                        end
+                    end)
+                    ay(aB.Position.X)
+                end
             end)
-            ah.AddSignal(plusBtn.MouseButton1Click, function()
-                h:SetValue((h.Value or f.Default) + (f.Rounding or 1))
+            ag.AddSignal(an.MinusButton.MouseButton1Click, function()
+                local step = as > 0 and as or at
+                local newValue = math.clamp(an.Value - step, aq, ar)
+                if as > 0 then
+                    newValue = math.floor(newValue / as + 0.5) * as
+                end
+                an.Value = newValue
+                local az = math.clamp((newValue - aq) / (ar - aq), 0, 1)
+                av(UDim2.new(az, 0, 0, 5))
+                an.SliderFill.Size = UDim2.new(az, 0, 0, 5)
+                if am.Callback then
+                    local aB, aC = pcall(am.Callback, newValue)
+                    if not aB then
+                        e(ab.Parent.Parent):Notify({
+                            Title = "Interface",
+                            Content = "Callback error",
+                            SubContent = aC,
+                            Duration = 5
+                        })
+                    end
+                end
             end)
-            -- Fim dos botões
-            ah.AddSignal(
-                k.InputBegan,
-                function(p)
-                    if p.UserInputType == Enum.UserInputType.MouseButton1 or p.UserInputType == Enum.UserInputType.Touch then
-                        i = true
+            ag.AddSignal(an.PlusButton.MouseButton1Click, function()
+                local step = as > 0 and as or at
+                local newValue = math.clamp(an.Value + step, aq, ar)
+                if as > 0 then
+                    newValue = math.floor(newValue / as + 0.5) * as
+                end
+                an.Value = newValue
+                local az = math.clamp((newValue - aq) / (ar - aq), 0, 1)
+                av(UDim2.new(az, 0, 0, 5))
+                an.SliderFill.Size = UDim2.new(az, 0, 0, 5)
+                if am.Callback then
+                    local aB, aC = pcall(am.Callback, newValue)
+                    if not aB then
+                        e(ab.Parent.Parent):Notify({
+                            Title = "Interface",
+                            Content = "Callback error",
+                            SubContent = aC,
+                            Duration = 5
+                        })
                     end
                 end
-            )
-            ah.AddSignal(
-                k.InputEnded,
-                function(p)
-                    if p.UserInputType == Enum.UserInputType.MouseButton1 or p.UserInputType == Enum.UserInputType.Touch then
-                        i = false
+            end)
+            function an.SetDesc(aA, aB)
+                if aB == nil then
+                    aB = ""
+                end
+                if aB == "" then
+                    an.Desc.Visible = false
+                else
+                    an.Desc.Visible = true
+                end
+                an.Desc.Text = aB
+            end
+            function an.SetValue(aA, aB)
+                aB = math.clamp(aB, aq, ar)
+                if as > 0 then
+                    aB = math.floor(aB / as + 0.5) * as
+                end
+                an.Value = aB
+                local aC = math.clamp((aB - aq) / (ar - aq), 0, 1)
+                av(UDim2.new(aC, 0, 0, 5))
+                an.SliderFill.Size = UDim2.new(aC, 0, 0, 5)
+                if am.Callback then
+                    local aD, aE = pcall(am.Callback, aB)
+                    if not aD then
+                        e(ab.Parent.Parent):Notify({
+                            Title = "Interface",
+                            Content = "Callback error",
+                            SubContent = aE,
+                            Duration = 5
+                        })
                     end
                 end
-            )
-            ah.AddSignal(
-                af.InputChanged,
-                function(p)
-                    if
-                        i and
-                            (p.UserInputType == Enum.UserInputType.MouseMovement or
-                                p.UserInputType == Enum.UserInputType.Touch)
-                     then
-                        local s = math.clamp((p.Position.X - l.AbsolutePosition.X) / l.AbsoluteSize.X, 0, 1)
-                        h:SetValue(h.Min + ((h.Max - h.Min) * s))
-                    end
-                end
-            )
-            function h.OnChanged(p, s)
-                h.Changed = s
-                s(h.Value)
             end
-            function h.SetValue(p, s)
-                p.Value = g:Round(math.clamp(s, h.Min, h.Max), h.Rounding)
-                k.Position = UDim2.new((p.Value - h.Min) / (h.Max - h.Min), -7, 0.5, 0)
-                m.Size = UDim2.fromScale((p.Value - h.Min) / (h.Max - h.Min), 1)
-                n.Text = tostring(p.Value)
-                g:SafeCallback(h.Callback, p.Value)
-                g:SafeCallback(h.Changed, p.Value)
-            end
-            function h.Destroy(p)
-                j:Destroy()
-                g.Options[e] = nil
-            end
-            h:SetValue(f.Default)
-            g.Options[e] = h
-            return h
+            an:SetDesc(am.Description)
+            an:SetValue(ap)
+            return an
         end
-        return c
     end,
     [27] = function()
         local aa, ab, ac, ad, ae = b(27)
