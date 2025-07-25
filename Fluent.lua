@@ -3421,59 +3421,13 @@ local aa = {
                         ThemeTag = {TextColor3 = "SubText"}
                     }
                 )
-            -- Botões + e -
-            -- Botões + e -
-            local btnSize = 18 -- Tamanho reduzido
-            local btnPadding = 2 -- Espaçamento entre botões
-            local minusBtn = ai(
-                "TextButton",
-                {
-                    Size = UDim2.fromOffset(btnSize, btnSize),
-                    Position = UDim2.new(1, -(btnSize * 2 + btnPadding + 100), 0.5, 0), -- Lado a lado com plusBtn
-                    AnchorPoint = Vector2.new(1, 0.5),
-                    BackgroundTransparency = 0.5,
-                    BackgroundColor3 = Color3.fromRGB(120, 120, 120),
-                    Text = "-",
-                    TextTransparency = 0,
-                    FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json"),
-                    TextSize = 12, -- Tamanho do texto reduzido
-                    TextColor3 = Color3.fromRGB(200, 200, 200),
-                    ThemeTag = {BackgroundColor3 = "SliderRail", TextColor3 = "Text"},
-                    Parent = j.Frame
-                },
-                {
-                    ai("UICorner", {CornerRadius = UDim.new(0, 4)}),
-                    ai("UIStroke", {Transparency = 0.65, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, ThemeTag = {Color = "InElementBorder"}})
-                }
-            )
-            local plusBtn = ai(
-                "TextButton",
-                {
-                    Size = UDim2.fromOffset(btnSize, btnSize),
-                    Position = UDim2.new(1, -100, 0.5, 0), -- À direita do minusBtn
-                    AnchorPoint = Vector2.new(1, 0.5),
-                    BackgroundTransparency = 0.5,
-                    BackgroundColor3 = Color3.fromRGB(120, 120, 120),
-                    Text = "+",
-                    TextTransparency = 0,
-                    FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json"),
-                    TextSize = 12, -- Tamanho do texto reduzido
-                    TextColor3 = Color3.fromRGB(200, 200, 200),
-                    ThemeTag = {BackgroundColor3 = "SliderRail", TextColor3 = "Text"},
-                    Parent = j.Frame
-                },
-                {
-                    ai("UICorner", {CornerRadius = UDim.new(0, 4)}),
-                    ai("UIStroke", {Transparency = 0.65, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, ThemeTag = {Color = "InElementBorder"}})
-                }
-            )
             local o =
                 ai(
                 "Frame",
                 {
-                    Size = UDim2.new(1, -(btnSize * 2 + btnPadding + 100), 0, 4), -- Ajustado para botões lado a lado
+                    Size = UDim2.new(1, 0, 0, 4),
                     AnchorPoint = Vector2.new(1, 0.5),
-                    Position = UDim2.new(1, -(btnSize * 2 + btnPadding + 104), 0.5, 0),
+                    Position = UDim2.new(1, -10, 0.5, 0),
                     BackgroundTransparency = 0.4,
                     Parent = j.Frame,
                     ThemeTag = {BackgroundColor3 = "SliderRail"}
@@ -3486,15 +3440,6 @@ local aa = {
                     l
                 }
             )
-            -- Manipuladores dos botões
-            ah.AddSignal(minusBtn.MouseButton1Click, function()
-                local step = f.Rounding > 0 and f.Rounding or 1
-                h:SetValue(h.Value - step)
-            end)
-            ah.AddSignal(plusBtn.MouseButton1Click, function()
-                local step = f.Rounding > 0 and f.Rounding or 1
-                h:SetValue(h.Value + step)
-            end)
             ah.AddSignal(
                 k.InputBegan,
                 function(p)
