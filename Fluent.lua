@@ -3487,10 +3487,12 @@ local aa = {
             )
             -- Manipuladores dos botões
             ah.AddSignal(minusBtn.MouseButton1Click, function()
-                h:SetValue(h.Value - (f.Rounding or 1))
+                local step = f.Rounding > 0 and f.Rounding or 1
+                h:SetValue(h.Value - step)
             end)
             ah.AddSignal(plusBtn.MouseButton1Click, function()
-                h:SetValue(h.Value + (f.Rounding or 1))
+                local step = f.Rounding > 0 and f.Rounding or 1
+                h:SetValue(h.Value + step)
             end)
             ah.AddSignal(
                 k.InputBegan,
