@@ -3473,7 +3473,7 @@ local aa = {
                 {
                     Size = UDim2.new(1, -(btnSize * 2 + btnPadding + 100), 0, 4), -- Ajustado para botões lado a lado
                     AnchorPoint = Vector2.new(1, 0.5),
-                    Position = UDim2.new(1, -(btnSize * 2 + btnPadding + 104), 0.1, 0),
+                    Position = UDim2.new(1, -(btnSize * 2 + btnPadding + 104), 0.5, 0),
                     BackgroundTransparency = 0.4,
                     Parent = j.Frame,
                     ThemeTag = {BackgroundColor3 = "SliderRail"}
